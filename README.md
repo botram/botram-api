@@ -21,15 +21,18 @@ Botram uses a number of open source projects to work properly:
 * coming soon...
 
 ### API services
-| Method | Endpoint          | Description        |
-|--------|-------------------|--------------------|
-| POST   | /users/register   | User registeration |
-| POST   | /users/login      | User login         |
-| POST   | /users/logout     | User logout        |
-| POST   | /users/food       | User add food      |
-| GET    | /users/food/:food | User search food   |
-| GET    | /users/favourite  | User favourite     |
-| PUT    | /users/food/:food | User updating food |
+| Method | Endpoint                  | Description        |
+|--------|---------------------------|--------------------|
+| PUT    | /users/profile            | User profile edit  |
+| POST   | /users/login              | User login         |
+| POST   | /users/logout             | User logout        |
+| POST   | /users/food               | User add food      |
+| GET    | /users/food/:food         | User search food   |
+| POST   | /users/food/req           | User Req food      |
+| PUT    | /users/food/req/:custid   | Seller confirmation|
+| GET    | /users/food               | display all food   |
+| GET    | /users/favourite          | User favourite     |
+| PUT    | /users/food/:food         | User updating food |
 
 ### User Stories
 
