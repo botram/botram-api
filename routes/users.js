@@ -3,11 +3,7 @@ var router = express.Router();
 const controllers = require('../controllers/food')
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
-
+router.get('/food', controllers.read);
 router.post('/food', controllers.create);
 
 module.exports = router;
