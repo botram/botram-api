@@ -1,22 +1,41 @@
-var mongoose = require('mongoose')
-var Schema = mongoose.Schema
+const mongoose = require('mongoose')
+const validate = require('mongoose-validator')
+const Schema = mongoose.Schema
 
 // create a schema
-var foodSchema = new Schema({
-  _userId: { type: Schema.Types.ObjectId, ref :'User' },
-  food_title: { type: String, required: true },
-  food_pic : String,
-  food_price: { type: String,required: true},
-  food_qty:  Schema.Types.Mixed,
-  food_tags :[String],
-  food_desc : String,
-  _requestId : { type: Schema.Types.ObjectId, ref :'Request' },
+const foodSchema = new Schema({
+  _userId    : { type: Schema.Types.ObjectId, ref :'User' },
+  food_title : { type: String, required: [true, 'Judul makanan harus diisi'] },
+  food_pic   : { type: String, required: [true, 'Foto makanan tidak ada ! contoh: food.jpg'] },
+  food_price : {
+    type: Number,
+    validate: {
+          validator: function(v) {
+            if(typeof(v) === "string") return false
+          },
+          message: 'Harga makanan harus berupa angka !'
+        },
+          required   :  [ true, 'harga makanan harus diisi']
+  },
+  food_qty   :   {
+    type: Number,
+    validate: {
+          validator: function(v) {
+            if(typeof(v) === "string") return false
+          },
+          message: 'Porsi makanan harus berupa angka ! contoh : 1 porsi, 2 porsi'
+        },
+  required   :  [ true, 'harga makanan harus diisi']
+  },
+  food_tags  :  [String],
+  food_desc  :  { type: String, required: [true, 'Deskripsi makanan harus diisi'] },
+  _requestId :  [{ type: Schema.Types.ObjectId, ref :'Request' }],
   status : Number
 })
 
 // the schema is useless so far
 // we need to create a model using it
-var Food = mongoose.model('Food', foodSchema)
+const Food = mongoose.model('Food', foodSchema)
 
 // make this available to our users in our Node applications
 module.exports = Food
