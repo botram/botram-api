@@ -28,8 +28,9 @@ Botram uses a number of open source projects to work properly:
 | POST   | /users/logout             | User logout        |
 | POST   | /users/food               | User add food      |
 | GET    | /users/food/:food         | User search food   |
-| POST   | /users/food/req           | User Req food      |
-| PUT    | /users/food/req/:custid   | Seller confirmation|
+| POST   | /users/request            | User Req food      |
+| GET    | /users/request            | Display request    |
+| PUT    | /users/request            | Seller confirmation|
 | GET    | /users/food               | display all food   |
 | GET    | /users/favourite          | User favourite     |
 | PUT    | /users/food/:food         | User updating food |

@@ -30,6 +30,17 @@ describe('Testing CRUD - food', function () {
       })
   })
 
+  it('result - Get all food', function (done) {
+    chai.request(app)
 
-
+      .get('/users/food')
+      .end(function (err, res) {
+        
+        expect(res).to.have.status(200);
+        expect(res).to.be.an('object');
+        done()
+      })
   })
+
+
+})

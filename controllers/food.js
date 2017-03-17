@@ -5,9 +5,8 @@ module.exports = {
     create : function(req,res){
 
         let tags = req.body.food_tags.split(" ")
-
         let food = {
-          _userId: req.body._userid,
+
           food_title: req.body.food_title,
           food_pic : req.body.food_pic,
           food_price: req.body.food_price,
@@ -16,7 +15,6 @@ module.exports = {
           food_desc : req.body.food_desc,
           status : 1
         }
-
         model.create(food)
         .then(function(data){
           if(data) res.json({success : data})
@@ -27,16 +25,35 @@ module.exports = {
     },
     read : function (req,res){
 
-      model.find()
+      let food = {
+        status : 1
+      }
+      model.find(food)
       .then(function(data){
         if(data) res.json({success : data})
       })
       .catch(function(err){
         if(err) res.json({err : err})
       })
+    },
+
+    update : function (req,res){
+
+      let food = {
+        _id : req.body._foodId
+      }
+
+      Model.findOne(food)
+      .then(function(data){
+        if(data){
+          data.status = 1
+          data.save()
+          res.json({success : data})
+        }
+      })
+      .catch(function(err){
+        if(err) res.json({err : err})
+      })
     }
-
-
-
 
 }
