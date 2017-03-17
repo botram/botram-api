@@ -12,7 +12,8 @@ var users = require('./routes/users');
 
 var app = express();
 // Build the connection string
-var dbURI = 'mongodb://localhost/botramdb';
+var dbURI = process.env.MONGO_URL || 'mongodb://localhost/botramdb'
+console.log(dbURI);
 
 // Create the database connection
 mongoose.connect(dbURI);
