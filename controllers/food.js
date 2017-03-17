@@ -2,7 +2,6 @@ const model = require('../models/food')
 
 module.exports = {
 
-
     create : function(req,res){
 
         let tags = req.body.food_tags.split(" ")
@@ -25,6 +24,16 @@ module.exports = {
         .catch(function(err){
           if(err) res.json({err : err})
         })
+    },
+    read : function (req,res){
+
+      model.find()
+      .then(function(data){
+        if(data) res.json({success : data})
+      })
+      .catch(function(err){
+        if(err) res.json({err : err})
+      })
     }
 
 
