@@ -9,6 +9,17 @@ Botram-api is an API service for mobile app called "Botram", developed by :
   - [radityaarya](https://github.com/radityaarya)
   - [axiomaswn](https://github.com/axiomaswn)
 
+
+# NEW FEATURE !
+
+  these are new feature from botram API
+   - User can post their food ! but not with the pic
+   - User can Request a food they wanted !
+   - User can Accept / non - Accept request from another user !
+   - User can see all the food their created !
+   - User can see all requested food !
+   - User can re-sell their sold out food !
+
 ### Tech
 
 Botram uses a number of open source projects to work properly:
