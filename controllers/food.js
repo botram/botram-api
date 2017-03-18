@@ -3,7 +3,7 @@ const model = require('../models/food')
 module.exports = {
 
     create : function(req,res){
-
+      //DISINI BUTUH ID USER 
         let tags = req.body.food_tags.split(" ")
         let food = {
 
@@ -59,7 +59,6 @@ module.exports = {
 
       var regex = new RegExp(req.params.food, "i")
 
-
       let food = {
        food_title : regex
       }
@@ -67,7 +66,6 @@ module.exports = {
       let tag = {
         food_tags : {$in: [regex]}
       }
-      console.log(food);
 
       model.find({
         $or:[food,tag]
