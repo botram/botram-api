@@ -7,9 +7,11 @@ const requestController = require('../controllers/request')
 router.get('/food', controllers.read);
 router.post('/food', controllers.create);
 router.put('/food', controllers.update)
+router.get('/food/:food', controllers.browse)
 
-router.post('/request', requestController.create);
+
 router.get('/request', requestController.read);
+router.post('/request', requestController.create);
 router.put('/request', requestController.update);
 
 

@@ -17,6 +17,7 @@ console.log(dbURI);
 
 // Create the database connection
 mongoose.connect(dbURI);
+mongoose.Promise = global.Promise;
 
 // CONNECTION EVENTS
 // When successfully connected

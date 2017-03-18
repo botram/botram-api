@@ -43,7 +43,7 @@ module.exports = {
         _id : req.body._foodId
       }
 
-      Model.findOne(food)
+      model.findOne(food)
       .then(function(data){
         if(data){
           data.status = 1
@@ -52,6 +52,29 @@ module.exports = {
         }
       })
       .catch(function(err){
+        if(err) res.json({err : err})
+      })
+    },
+    browse : function(req,res){
+
+      var regex = new RegExp(req.params.food, "i")
+
+
+      let food = {
+       food_title : regex
+      }
+
+      let tag = {
+        food_tags : {$in: [regex]}
+      }
+      console.log(food);
+
+      model.find({
+        $or:[food,tag]
+      })
+      .then(function(item){
+        if(item) res.json({ success : item})
+      }).catch(function(err){
         if(err) res.json({err : err})
       })
     }
