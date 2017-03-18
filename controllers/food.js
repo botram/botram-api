@@ -1,9 +1,11 @@
 const model = require('../models/food')
+const multer = require('multer');
 
 module.exports = {
 
     create : function(req,res){
-
+      console.log("masuk");
+      console.log(req.file);
         let tags = req.body.food_tags.split(" ")
         let food = {
 
@@ -17,7 +19,10 @@ module.exports = {
         }
         model.create(food)
         .then(function(data){
-          if(data) res.json({success : data})
+          if(data) {
+            res.json({success : data})
+            console.log(req.file)
+          }
         })
         .catch(function(err){
           if(err) res.json({err : err})
