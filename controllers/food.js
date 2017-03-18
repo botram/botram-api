@@ -3,12 +3,11 @@ const model = require('../models/food')
 module.exports = {
 
     create : function(req,res){
-
+      console.log(req.file)
         let tags = req.body.food_tags.split(" ")
         let food = {
-
           food_title: req.body.food_title,
-          food_pic : req.body.food_pic,
+          food_pic : req.file.filename,
           food_price: req.body.food_price,
           food_qty:  req.body.food_qty,
           food_tags :tags,
@@ -17,7 +16,9 @@ module.exports = {
         }
         model.create(food)
         .then(function(data){
-          if(data) res.json({success : data})
+          if(data) {
+            res.json({success : data})
+          }
         })
         .catch(function(err){
           if(err) res.json({err : err})
