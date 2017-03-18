@@ -16,9 +16,11 @@ var storage = multer.diskStorage({
 router.get('/food', controllers.read);
 router.post('/food', multer({ storage: storage }).single('food-picture'), controllers.create);
 router.put('/food', controllers.update)
+router.get('/food/:food', controllers.browse)
 
-router.post('/request', requestController.create);
+
 router.get('/request', requestController.read);
+router.post('/request', requestController.create);
 router.put('/request', requestController.update);
 
 
