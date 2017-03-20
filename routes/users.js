@@ -8,14 +8,16 @@ var storage = multer.diskStorage({
     cb(null, './public/images/')
   },
   filename: function (req, file, cb) {
-    cb(null, 'botram-food' + '-' + Date.now() + '.' + file.mimetype.split('/')[2])
+    cb(null, 'botram-food' + '-' + Date.now() + '.' + file.mimetype.split('/')[1])
   }
 })
+
 
 /* GET users listing. */
 
 router.get('/food', controllers.read)
-router.post('/food', multer({ storage: storage }).single('food-picture'), controllers.create);
+router.get('/food/:food', multer({ storage: storage }).single('food-picture'),controllers.browse)
+router.post('/food', controllers.create);
 router.put('/food', controllers.update)
 router.delete('/food', controllers.delete)
 

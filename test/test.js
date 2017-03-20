@@ -11,12 +11,12 @@ describe('Testing CRUD - food', function () {
   it('result - Post a food', function (done) {
     chai.request(app)
       .post('/users/food')
+      .attach('food_pic', './test/test_image/botram.png')
       .send({
-        food_title: "Taichan gulai sapi ",
-        food_pic : "taichan.jpg",
-        food_price: "75000",
-        food_qty  : 7,
-        food_tags :"sate taichan sapi",
+        food_title: "Nasi Bebek Sambel Ijo",
+        food_price: "35000",
+        food_qty  : 3,
+        food_tags :"pedas enak gurih",
         food_desc : "deskripsi tentang sebuah makanan",
         status : 1
       })
@@ -33,17 +33,18 @@ describe('Testing CRUD - food', function () {
 
       .get('/users/food')
       .end(function (err, res) {
+
         expect(res).to.have.status(200);
         expect(res).to.be.an('object');
         done()
       })
   })
 
-  it('result - Search food with tag "pedas"', function (done) {
+  it('result - Search food with tag "sapi"', function (done) {
     chai.request(app)
 
-      .get('/users/food/pedas')
-      .end(function (err, res)
+      .get('/users/food/sapi')
+      .end(function (err, res) {
         expect(res).to.have.status(200);
         expect(res).to.be.an('object');
         done()

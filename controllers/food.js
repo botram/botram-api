@@ -3,10 +3,10 @@ const model = require('../models/food')
 module.exports = {
 
     create : function(req,res){
+
       //DISINI BUTUH ID USER
         let tags = req.body.food_tags.split(" ")
         tags = tags.map(tag => tag.toLowerCase())
-
         let food_date = new Date()
         let food = {
           food_title: req.body.food_title,
@@ -52,7 +52,7 @@ module.exports = {
       }
       let qty = req.body.food_qty
       let date = new Date()
-      
+
       model.findOne(food)
       .then(function(data){
         if(data){
@@ -67,7 +67,7 @@ module.exports = {
         if(err) res.json({err : err})
       })
     },
-  
+
     delete : function (req,res){
       let food = {
         _id : req.body._foodId
@@ -79,9 +79,9 @@ module.exports = {
       .catch(function(err){
         if(err) res.json({err : err})
       })
-       
+
     },
-  
+
       browse : function(req,res){
 
       var regex = new RegExp(req.params.food, "i")
@@ -92,7 +92,7 @@ module.exports = {
       let tag = {
         food_tags : {$in: [regex]}
       }
-      
+
       model.find({
         $or:[food,tag]
       })
@@ -101,7 +101,7 @@ module.exports = {
       }).catch(function(err){
 
         if(err) res.json({err : err})
-      })        
+      })
 
   }
 }
