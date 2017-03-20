@@ -31,7 +31,7 @@ router.delete('/request',requestController.delete)
 
 router.get('/', userController.list);
 router.get('/:id', userController.show);
-router.post('/', multer({ storage: storage }).single('picture'), userController.create);
+router.post('/', userController.create);
 router.put('/:id', userController.update);
 router.put('/:id/favbysearch', userController.favBySearch);
 router.put('/:id/addrating', userController.addRating);
