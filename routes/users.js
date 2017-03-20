@@ -21,6 +21,7 @@ router.get('/food', controllers.read);
 router.post('/food', multer({ storage: storage }).single('picture'), controllers.create);
 router.put('/food', controllers.update)
 router.delete('/food', controllers.delete)
+router.get('/food/:food', controllers.browse);
 
 router.post('/request', requestController.create)
 router.get('/request', requestController.read)
