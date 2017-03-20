@@ -13,15 +13,18 @@ var storage = multer.diskStorage({
 })
 
 /* GET users listing. */
-router.get('/food', controllers.read);
+
+router.get('/food', controllers.read)
 router.post('/food', multer({ storage: storage }).single('food-picture'), controllers.create);
 router.put('/food', controllers.update)
-router.get('/food/:food', controllers.browse)
+router.delete('/food', controllers.delete)
+
+router.post('/request', requestController.create)
+router.get('/request', requestController.read)
+router.put('/request', requestController.update)
+router.delete('/request',requestController.delete)
 
 
-router.get('/request', requestController.read);
-router.post('/request', requestController.create);
-router.put('/request', requestController.update);
 
 
 module.exports = router;
