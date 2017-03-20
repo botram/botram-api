@@ -33,12 +33,55 @@ describe('Testing CRUD - food', function () {
 
       .get('/users/food')
       .end(function (err, res) {
-
         expect(res).to.have.status(200);
         expect(res).to.be.an('object');
         done()
       })
   })
 
+  it('result - Search food with tag "pedas"', function (done) {
+    chai.request(app)
+
+      .get('/users/food/pedas')
+      .end(function (err, res)
+        expect(res).to.have.status(200);
+        expect(res).to.be.an('object');
+        done()
+      })
+  })
+
+})
+
+
+
+describe('Testing CRUD - Request', function () {
+
+it('result - Post a request', function (done) {
+  chai.request(app)
+    .post('/users/request')
+    .send({
+      _foodId : "58cbb54a7171b1237c5dd81f",
+      request_notes :"testing request something",
+      request_qty :2,
+      status : 0
+    })
+    .end(function (err, res) {
+
+      expect(res).to.have.status(200);
+      expect(res).to.be.an('object');
+      done()
+    })
+})
+
+it('result - Read all request', function (done) {
+  chai.request(app)
+    .get('/users/request')
+    .end(function (err, res) {
+
+      expect(res).to.have.status(200);
+      expect(res).to.be.an('object');
+      done()
+    })
+})
 
 })

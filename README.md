@@ -19,6 +19,7 @@ Botram-api is an API service for mobile app called "Botram", developed by :
    - User can see all the food their created !
    - User can see all requested food !
    - User can re-sell their sold out food !
+   - User can search food ! 
 
 ### Tech
 

@@ -2,7 +2,7 @@ const Model = require('../models/request')
 const Food = require('../models/food')
 
 module.exports = {
-
+    //DISINI BUTUH ID USER
     create : function(req,res){
         let food = {
           _id : req.body._foodId
@@ -13,6 +13,7 @@ module.exports = {
           request_qty   : req.body.request_qty,
           status : 0
         }
+
         Model.create(request)
         .then(function(data){
           if(data){
@@ -31,6 +32,7 @@ module.exports = {
           if(err) res.json({err : err})
         })
     },
+
     read : function (req,res){
 
       Model.find()
@@ -41,6 +43,7 @@ module.exports = {
         if(err) res.json({err : err})
       })
     },
+
     update : function (req,res){
 
       let request = {
