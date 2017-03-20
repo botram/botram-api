@@ -48,7 +48,7 @@ module.exports = {
      * userController.create()
      */
     create: function (req, res) {
-        var user = new userModel({    			name : req.body.name,    			email : req.body.email,          pic : req.file.filename,    			phone : req.body.phone,    			address : req.body.address,          city: req.body.city        });
+        var user = new userModel({    			name : req.body.name,    			email : req.body.email,          pic : req.body.pic        });
 
         user.save(function (err, user) {
             if (err) {
