@@ -1,11 +1,10 @@
 var express = require('express');
-
+var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var multer = require('multer');
-var path = require('path');
+
 // Bring Mongoose into the app
 var mongoose = require( 'mongoose' );
 
@@ -19,6 +18,7 @@ console.log(dbURI);
 
 // Create the database connection
 mongoose.connect(dbURI);
+mongoose.Promise = global.Promise;
 
 // CONNECTION EVENTS
 // When successfully connected
