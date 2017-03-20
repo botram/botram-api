@@ -5,6 +5,7 @@ module.exports = {
     create : function(req,res){
 
         let tags = req.body.food_tags.split(" ")
+        let food_date = new Date()
         let food = {
 
           food_title: req.body.food_title,
@@ -13,7 +14,8 @@ module.exports = {
           food_qty:  req.body.food_qty,
           food_tags :tags,
           food_desc : req.body.food_desc,
-          status : 1
+          status : 1,
+          food_date : food_date.toDateString()
         }
         model.create(food)
         .then(function(data){
@@ -25,7 +27,10 @@ module.exports = {
     },
     read : function (req,res){
 
+      let food_date = new Date()
+
       let food = {
+        food_date : food_date.toDateString(),
         status : 1
       }
       model.find(food)
@@ -43,10 +48,13 @@ module.exports = {
         _id : req.body._foodId
       }
 
+      let date = new Date()
+
       Model.findOne(food)
       .then(function(data){
         if(data){
           data.status = 1
+          data.food_date = date.toDateString()
           data.save()
           res.json({success : data})
         }

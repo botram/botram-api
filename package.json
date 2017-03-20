@@ -15,6 +15,7 @@
     "ejs": "~2.5.5",
     "express": "~4.14.1",
     "mongoose": "^4.9.0",
+    "mongoose-timestamp": "^0.6.0",
     "mongoose-validator": "^1.2.5",
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.2"

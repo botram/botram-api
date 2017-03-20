@@ -49,11 +49,28 @@ module.exports = {
 
       Model.findOne(request)
       .then(function(data){
-        if(data){
+        if(data)
           data.status = 1
           data.save()
-          res.json({success : data})
-        }
+
+        Food.findOne({
+          _requestId : request
+         })
+        .then(function(item){
+          if(item)
+          data.request_qty == item.food_qty ?
+          item.status = 0
+          item.food_qty = item.food_qty - data.request_qty :
+          item.food_qty = item.food_qty - data.request_qty
+          
+          item.save()
+          res.json({
+            request : data,
+            food : item})
+        })
+        .catch(function(err){
+          if(err) res.json({err : err})
+        })
       })
       .catch(function(err){
         if(err) res.json({err : err})
