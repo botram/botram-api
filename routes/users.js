@@ -29,7 +29,6 @@ router.put('/request', requestController.update)
 router.delete('/request',requestController.delete)
 
 
-
 router.get('/', userController.list);
 router.get('/:id', userController.show);
 router.post('/', userController.create);
