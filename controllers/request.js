@@ -46,7 +46,6 @@ module.exports = {
       let request = {
         _id : req.body._requestId
       }
-
       Model.findOne(request)
       .then(function(data){
         if(data)
@@ -58,11 +57,8 @@ module.exports = {
          })
         .then(function(item){
           if(item)
-          data.request_qty == item.food_qty ?
-          item.status = 0
-          item.food_qty = item.food_qty - data.request_qty :
-          item.food_qty = item.food_qty - data.request_qty
-          
+          data.request_qty == item.food_qty ? item.status = 0 : item.food_qty = item.food_qty - data.request_qty
+
           item.save()
           res.json({
             request : data,
@@ -75,6 +71,20 @@ module.exports = {
       .catch(function(err){
         if(err) res.json({err : err})
       })
+    },
+    delete : function(req,res){
+
+            let request = {
+              _id : req.body._requestId
+            }
+            Model.findByIdAndRemove(request)
+            .then(function(data){
+              if(data)
+                res.json({success :"Request Deleted"})
+            })
+            .catch(function(err){
+              if(err) res.json({err : err})
+            })
     }
 
 }
