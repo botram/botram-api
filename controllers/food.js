@@ -5,6 +5,8 @@ module.exports = {
     create : function(req,res){
 
         let tags = req.body.food_tags.split(" ")
+        tags = tags.map(tag => tag.toLowerCase())
+
         let food_date = new Date()
         let food = {
 
@@ -48,16 +50,31 @@ module.exports = {
         _id : req.body._foodId
       }
 
+      let qty = req.body.food_qty
       let date = new Date()
 
       Model.findOne(food)
       .then(function(data){
         if(data){
           data.status = 1
+          data.food_qty = qty
           data.food_date = date.toDateString()
           data.save()
           res.json({success : data})
         }
+      })
+      .catch(function(err){
+        if(err) res.json({err : err})
+      })
+    },
+
+    delete : function (req,res){
+      let food = {
+        _id : req.body._foodId
+      }
+      Model.findByIdAndRemove(food)
+      .then(function(data){
+        if(data) res.json({success : "Data Deleted"})
       })
       .catch(function(err){
         if(err) res.json({err : err})
