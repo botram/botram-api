@@ -58,7 +58,10 @@ module.exports = {
                     error: err
                 });
             }
-            return res.status(200).json(jwt.sign(user, 'secret'));
+            return res.status(200).json({
+              token : jwt.sign(user, 'secret'),
+              user_id : user._id
+            });
         });
     },
 
