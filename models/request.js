@@ -5,7 +5,16 @@ var Schema = mongoose.Schema
 var requestSchema = new Schema({
   _userId: { type: Schema.Types.ObjectId, ref :'User' },
   request_notes : String,
-  request_qty   : Number,
+  request_qty   :  {
+    type: Number,
+    validate: {
+          validator: function(v) {
+            if(typeof(v) === "string") return false
+          },
+          message: 'Permintaan makanan harus dalam jumlah angka'
+        },
+  required   :  [ true, 'Permintaan makanan harus diisi']
+  },
   status : Number
 })
 
