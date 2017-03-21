@@ -10,7 +10,7 @@ module.exports = {
         let food_date = new Date()
         let food = {
           food_title: req.body.food_title,
-          food_pic : req.file.filename,
+          food_pic : req.body.food_pic,
           food_price: req.body.food_price,
           food_qty:  req.body.food_qty,
           food_tags :tags,
