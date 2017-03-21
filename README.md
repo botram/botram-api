@@ -19,7 +19,7 @@ Botram-api is an API service for mobile app called "Botram", developed by :
    - User can see all the food their created !
    - User can see all requested food !
    - User can re-sell their sold out food !
-   - User can search food ! 
+   - User can search food !
 
 ### Tech
 
@@ -35,17 +35,24 @@ Botram uses a number of open source projects to work properly:
 ### API services
 | Method | Endpoint                  | Description        |
 |--------|---------------------------|--------------------|
-| PUT    | /users/profile            | User profile edit  |
+| GET    | /users                    | Users list         |
+| GET    | /users/:id                | show a user        |
+| POST   | /users                    | Create a User      |
+| PUT    | /users/:id                | User update Profile|
+| PUT    | /users/:id/favbysearch    | User favourite     |  
+| PUT    | /users/:id/addrating      | User add Rating    |
+| DELETE | /users/:id                | User Delete        |
 | POST   | /users/login              | User login         |
 | POST   | /users/logout             | User logout        |
 | POST   | /users/food               | User add food      |
+| PUT    | /users/food/              | User updating food |
 | GET    | /users/food/:food         | User search food   |
+| GET    | /users/food               | display all food   |
 | POST   | /users/request            | User Req food      |
 | GET    | /users/request            | Display request    |
 | PUT    | /users/request            | Seller confirmation|
-| GET    | /users/food               | display all food   |
-| GET    | /users/favourite          | User favourite     |
-| PUT    | /users/food/:food         | User updating food |
+| DELETE | /users/request            | Seller reject      |
+
 
 ### User Stories
 
@@ -58,9 +65,3 @@ As a user:
 As another user:
 
 - Bu Tini love to cook, and made her own recipe, she love to do some experiment about how to make a good recipe, and knowing that online bussiness is a great opportunities, which is made something, and sell it online ! she want to share her food so that everybody can had a good time with food, she need something to share or sell the food online
-
-
-### Todos
-
- - Create those API services
- - Create wireframing mobile version

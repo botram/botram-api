@@ -8,7 +8,7 @@ module.exports = {
           _id : req.body._foodId
         }
         let request = {
-
+          _userId : req.body._userId,
           request_notes : req.body.request_notes,
           request_qty   : req.body.request_qty,
           status : 0
