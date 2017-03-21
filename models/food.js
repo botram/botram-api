@@ -25,7 +25,7 @@ const foodSchema = new Schema({
           },
           message: 'Porsi makanan harus berupa angka ! contoh : 1 porsi, 2 porsi'
         },
-  required   :  [ true, 'harga makanan harus diisi']
+  required   :  [ true, 'Porsi makanan harus diisi']
   },
   food_tags  :  [String],
   food_desc  :  { type: String, required: [true, 'Deskripsi makanan harus diisi'] },
