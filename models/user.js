@@ -10,7 +10,8 @@ var userSchema = new Schema({
 	'rating' : Number,
 	'rated':Array,
 	'fav' : Array,
-	'city' : String
+	'city' : String,
+	'id_fb': String
 },{
 	'timestamps' : true
 });

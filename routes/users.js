@@ -37,7 +37,7 @@ router.post('/', userController.create);
 router.put('/:id', userController.update);
 router.put('/:id/favbysearch', userController.favBySearch);
 router.put('/:id/addrating', userController.addRating);
-router.delete('/:id', userController.remove);
+
 
 
 module.exports = router;

@@ -4,10 +4,10 @@ module.exports = {
 
     create : function(req,res){
 
-
         let tags = req.body.food_tags.split(" ")
         tags = tags.map(tag => tag.toLowerCase())
         let food_date = new Date()
+
         let food = {
           food_title: req.body.food_title,
           food_pic : req.body.food_pic,

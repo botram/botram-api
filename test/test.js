@@ -251,9 +251,8 @@ describe('Testing CRUD - User', function () {
 
         expect(res).to.have.status(200);
         expect(res).to.be.an('object');
-        expect(res.body).to.have.property("name")
-        expect(res.body).to.have.property("email")
-        expect(res.body).to.have.property("pic")
+        expect(res.body).to.be.a('string');
+
         done()
       })
   })
