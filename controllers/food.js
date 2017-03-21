@@ -4,7 +4,7 @@ module.exports = {
 
     create : function(req,res){
 
-      //DISINI BUTUH ID USER
+
         let tags = req.body.food_tags.split(" ")
         tags = tags.map(tag => tag.toLowerCase())
         let food_date = new Date()
@@ -16,7 +16,8 @@ module.exports = {
           food_tags :tags,
           food_desc : req.body.food_desc,
           status : 1,
-          food_date : food_date.toDateString()
+          food_date : food_date.toDateString(),
+          _userId : req.body._userId
         }
         model.create(food)
         .then(function(data){
@@ -36,7 +37,7 @@ module.exports = {
         food_date : food_date.toDateString(),
         status : 1
       }
-      model.find(food)
+      model.find(food).populate('_userId')
       .then(function(data){
         if(data) res.json({success : data})
       })
@@ -81,8 +82,7 @@ module.exports = {
       })
 
     },
-
-      browse : function(req,res){
+    browse : function(req,res){
 
       var regex = new RegExp(req.params.food, "i")
 
@@ -95,7 +95,7 @@ module.exports = {
 
       model.find({
         $or:[food,tag]
-      })
+      }).populate('_userId ')
       .then(function(item){
         if(item) res.json({ success : item})
       }).catch(function(err){
