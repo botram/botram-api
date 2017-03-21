@@ -1,5 +1,6 @@
 var userModel = require('../models/user');
 var foodModel = require('../models/food')
+const jwt = require('jsonwebtoken');
 
 /**
  * userController.js
@@ -48,7 +49,7 @@ module.exports = {
      * userController.create()
      */
     create: function (req, res) {
-        var user = new userModel({    			name : req.body.name,    			email : req.body.email,          pic : req.body.pic        });
+        var user = new userModel({    			name : req.body.name,    			email : req.body.email,          pic : req.body.pic,          id_fb: req.body.id_fb        });
 
         user.save(function (err, user) {
             if (err) {
@@ -57,7 +58,7 @@ module.exports = {
                     error: err
                 });
             }
-            return res.status(201).json(user);
+            return res.status(201).json(jwt.sign(user, 'secret'));
         });
     },
 
