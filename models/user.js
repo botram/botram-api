@@ -8,8 +8,7 @@ var userSchema = new Schema({
 	'phone' : String,
 	'address' : String,
 	'pic' : String,
-	'rating' : Number,
-	'rated':Array,
+	'rating' : Array,
 	'fav' : Array,
 	'city' : String,
 	'id_fb': String

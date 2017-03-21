@@ -48,6 +48,7 @@ module.exports = {
     /**
      * userController.create()
      */
+
     create: function (req, res) {
 
         var user = {    			name : req.body.name,    			email : req.body.email,          pic : req.body.pic,
@@ -68,8 +69,8 @@ module.exports = {
           }
 
         })
-
     },
+
 
     /**
      * userController.update()
