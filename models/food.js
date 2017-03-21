@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 
 // create a schema
 const foodSchema = new Schema({
-  _userId    : { type: Schema.Types.ObjectId, ref :'User' },
+  _userId    : { type: Schema.Types.ObjectId, ref :'user' },
   food_title : { type: String, required: [true, 'Judul makanan harus diisi'] },
   food_pic   : { type: String, required: [true, 'Foto makanan tidak ada ! contoh: food.jpg'] },
   food_price : {
