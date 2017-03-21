@@ -7,7 +7,8 @@ var userSchema = new Schema({
 	'phone' : String,
 	'address' : String,
 	'pic' : String,
-	'rating' : Array,
+	'rating' : Number,
+	'rated':Array,
 	'fav' : Array,
 	'city' : String
 },{
