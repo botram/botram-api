@@ -49,17 +49,21 @@ module.exports = {
      * userController.create()
      */
     create: function (req, res) {
-        var user = new userModel({    			name : req.body.name,    			email : req.body.email,          pic : req.body.pic,          id_fb: req.body.id_fb        });
+        var user = {    			name : req.body.name,    			email : req.body.email,          pic : req.body.pic,
+          id_fb: req.body.id_fb        };
 
-        user.save(function (err, user) {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Error when creating user',
-                    error: err
-                });
-            }
-            return res.status(201).json(jwt.sign(user, 'secret'));
-        });
+        userModel.findOrCreate({id_fb: user.id_fb}, function(err, user, created) {
+          if (err) {
+              return res.status(500).json({
+                  message: 'Error when getting user',
+                  error: err
+              });
+          }
+          if (!created || created) {
+              return res.status(201).json(jwt.sign(user, 'secret'))
+          }
+          
+        })
     },
 
     /**
