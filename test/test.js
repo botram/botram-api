@@ -9,7 +9,7 @@ const app = require('../app.js')
 describe('Testing CRUD - food', function () {
   // it('result - Post a food', function (done) {
   //   chai.request(app)
-  //     .post('/users/food')
+  //     .post('/api/users/food')
   //     .send({
   //       food_title: "Nasi Bebek Sambel Ijo",
   //       food_price: "35000",
@@ -30,7 +30,7 @@ describe('Testing CRUD - food', function () {
 
   it('result - Post a food, but food_pic is empty', function (done) {
     chai.request(app)
-      .post('/users/food')
+      .post('/api/users/food')
       .send({
         food_title: 'Nasi Bebek Sambel Ijo',
         food_price: '35000',
@@ -41,6 +41,7 @@ describe('Testing CRUD - food', function () {
         status: 1
       })
       .end(function (err, res) {
+        console.log(res.body);
         expect(res).to.have.status(200)
         expect(res).to.be.an('object')
         expect(res.body.success).to.have.property('food_title')
@@ -57,7 +58,7 @@ describe('Testing CRUD - food', function () {
 
   it('result - Post a food, but food_title is empty', function (done) {
     chai.request(app)
-      .post('/users/food')
+      .post('/api/users/food')
       .send({
         food_title: '',
         food_price: '35000',
@@ -79,7 +80,7 @@ describe('Testing CRUD - food', function () {
 
   it('result - Post a food, but food_price is string', function (done) {
     chai.request(app)
-      .post('/users/food')
+      .post('/api/users/food')
       .send({
         food_title: 'food title',
         food_price: 'some String',
@@ -101,7 +102,10 @@ describe('Testing CRUD - food', function () {
 
   it('result - Get all food', function (done) {
     chai.request(app)
-      .get('/users/food')
+
+
+      .get('/api/users/food')
+
       .end(function (err, res) {
         expect(res).to.have.status(200)
         expect(res).to.be.an('object')
@@ -113,7 +117,7 @@ describe('Testing CRUD - food', function () {
 
   it('result - Search food with tag "sapi"', function (done) {
     chai.request(app)
-      .post('/users/food')
+      .post('/api/users/food')
       .send({
         food_title: 'food title',
         food_price: 'some String',
@@ -129,10 +133,13 @@ describe('Testing CRUD - food', function () {
         expect(res.body.err).to.be.an('object')
         expect(res.body.err.message).to.equal('Food validation failed')
 
+
         done()
       })
     chai.request(app)
-      .get('/users/food/sapi')
+
+      .get('/api/users/food/sapi')
+
       .end(function (err, res) {
         expect(res).to.have.status(200)
         expect(res).to.be.an('object')
@@ -144,20 +151,23 @@ describe('Testing CRUD - food', function () {
 
   it('result - Searching food but not found', function (done) {
     chai.request(app)
-      .get('/users/food/something')
+
+      .get('/api/users/food/something')
+
       .end(function (err, res) {
-        // expect(res).to.have.status(200)
-        // expect(res).to.be.an('object')
-        // expect(res.body).to.have.property('success')
+        expect(res).to.have.status(200)
+        expect(res).to.be.an('object')
+        expect(res.body).to.have.property('success')
         done()
       })
   })
 })
 
 describe('Testing CRUD - Request', function () {
-  it('result - Post a request', function (done) {
-    chai.request(app)
-    .post('/users/request')
+
+it('result - Post a request', function (done) {
+  chai.request(app)
+    .post('/api/users/request')
     .send({
       _foodId: '58d0d986362503157eb7a4fc',
       request_notes: 'Irsan testing request again !',
@@ -171,9 +181,10 @@ describe('Testing CRUD - Request', function () {
     })
   })
 
-  it('result - Post a request, request_qty diisi dengan String', function (done) {
-    chai.request(app)
-    .post('/users/request')
+
+it('result - Post a request, request_qty diisi dengan String', function (done) {
+  chai.request(app)
+    .post('/api/users/request')
     .send({
       _foodId: '58d0d986362503157eb7a4fc',
       request_notes: 'testing request something',
@@ -189,9 +200,10 @@ describe('Testing CRUD - Request', function () {
     })
   })
 
-  it('result - Post a request, request_qty tidak diisi', function (done) {
-    chai.request(app)
-    .post('/users/request')
+
+it('result - Post a request, request_qty tidak diisi', function (done) {
+  chai.request(app)
+    .post('/api/users/request')
     .send({
       _foodId: '58d0d986362503157eb7a4fc',
       request_notes: 'testing request something',
@@ -209,7 +221,7 @@ describe('Testing CRUD - Request', function () {
 
 // it('result - put a request, seller menerima request dari user [syaratnya, harus post request baru untuk sebuah makanan, lalu ambil request idny, dan put disini]', function (done) {
 //   chai.request(app)
-//     .put('/users/request')
+//     .put('/api/users/request')
 //     .send({
 //       _requestId : "",
 //     })
@@ -226,9 +238,11 @@ describe('Testing CRUD - Request', function () {
 //     })
 // })
 
-  it('result - Read all request', function (done) {
-    chai.request(app)
-    .get('/users/request')
+
+
+it('result - Read all request', function (done) {
+  chai.request(app)
+    .get('/api/users/request')
     .end(function (err, res) {
       expect(res).to.have.status(200)
       expect(res).to.be.an('object')

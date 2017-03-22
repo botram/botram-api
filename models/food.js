@@ -27,11 +27,12 @@ const foodSchema = new Schema({
     },
     required: [ true, 'Porsi makanan harus diisi']
   },
-  food_tags: [String],
-  food_desc: { type: String, required: [true, 'Deskripsi makanan harus diisi'] },
-  _requestId: [{ type: Schema.Types.ObjectId, ref: 'Request' }],
-  status: Number,
-  food_date: String
+
+  food_tags  :  [String],
+  food_desc  :  { type: String, required: [true, 'Deskripsi makanan harus diisi'] },
+  _requestId :  [{ type: Schema.Types.ObjectId, ref :'Request' }],
+  status : Number,
+  food_date : String
 })
 
 // the schema is useless so far
