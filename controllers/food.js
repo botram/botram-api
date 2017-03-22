@@ -13,8 +13,6 @@ module.exports = {
           food_pic : req.body.food_pic,
           food_price: req.body.food_price,
           food_qty:  req.body.food_qty,
-          food_city : req.body.food_city,
-          food_address: req.body.food_address,
           food_tags :tags,
           food_desc : req.body.food_desc,
           status : 1,
