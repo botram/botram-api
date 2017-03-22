@@ -9,13 +9,13 @@ const cektoken = (req,res,next) => {
   if(!req.header('token')) {
     res.send('Unauthorized')
   } else {
-    let verified = jwt.verify(req.header('token'), 'secret', () => {
-
+    let verified = jwt.verify(req.header('token'), 'secret', (err,decoded) => {
+      if(err){
+        res.send('Unauthorized')
+      } else {
         next()
-
+      }
     })
-
-
   }
 }
 
