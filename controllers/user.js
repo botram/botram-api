@@ -52,9 +52,9 @@ module.exports = {
     create: function (req, res) {
 
         var user = {    			name : req.body.name,    			email : req.body.email,          pic : req.body.pic,
-          id_fb: req.body.id_fb        };
+          id_fb: req.body.id_fb,          city : "",          address :"",          phone : ""        };
 
-        userModel.findOrCreate({id_fb: user.id_fb}, function(err, user, created) {
+        userModel.findOrCreate(user, function(err, user, created) {
           if (err) {
               return res.status(500).json({
                   message: 'Error when getting user',
@@ -70,7 +70,6 @@ module.exports = {
 
         })
     },
-
 
     /**
      * userController.update()
@@ -90,7 +89,7 @@ module.exports = {
                 });
             }
 
-      			user.phone = req.body.phone ? req.body.phone : user.phone;      			user.address = req.body.address ? req.body.address : user.address;      			user.city = req.body.city ? req.body.city : user.city;
+      			user.phone === req.body.phone ? user.phone : user.phone = req.body.phone;      			user.address === req.body.address ? user.address : user.address = req.body.address;      			user.city === req.body.city ? user.city : user.city = req.body.city;
             user.save(function (err, user) {
                 if (err) {
                     return res.status(500).json({
