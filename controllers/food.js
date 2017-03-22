@@ -29,13 +29,47 @@ module.exports = {
           if(err) res.json({err : err})
         })
     },
-    read : function (req,res){
 
-      let food_date = new Date()
+    // read : function (req,res){
+    //   let food_date = new Date()
+    //   let food = {
+    //     food_date : food_date.toDateString(),
+    //     status : 1
+    //   }
+    //   model.find(food).populate('_userId')
+    //   .then(function(data){
+    //     if(data) res.json({success : data})
+    //   })
+    //   .catch(function(err){
+    //     if(err) res.json({err : err})
+    //   })
+    // },
+
+    read : (req,res) => {
+      model.getAllSorted((err,data) => {
+        res.json(data)
+      })
+    },
+
+
+    foodDetail : function (req,res){
 
       let food = {
-        food_date : food_date.toDateString(),
-        status : 1
+        _id: req.params.id
+      }
+      model.find(food).populate('_userId')
+      .then(function(data){
+        if(data) res.json({success : data})
+      })
+      .catch(function(err){
+        if(err) res.json({err : err})
+      })
+    },
+
+    foodbyUser : function (req,res){
+
+      let food = {
+        _userId: req.params.iduser
       }
       model.find(food).populate('_userId')
       .then(function(data){
@@ -87,7 +121,7 @@ module.exports = {
       .catch(function(err){
         if(err) res.json({err : err})
       })
-    }
+    },
 
     delete : function (req,res){
       let food = {

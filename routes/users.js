@@ -22,6 +22,8 @@ const cektoken = (req,res,next) => {
 
 /* GET users listing. */
 router.get('/food',cektoken, controllers.read);
+router.get('/food/:id', cektoken, controllers.foodDetail)
+router.get('/food/byuser/:iduser', cektoken, controllers.foodbyUser)
 router.post('/food',cektoken, controllers.create);
 router.put('/food',cektoken, controllers.update)
 router.put('/food/edit',cektoken, controllers.edit)

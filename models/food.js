@@ -33,7 +33,13 @@ const foodSchema = new Schema({
   _requestId :  [{ type: Schema.Types.ObjectId, ref :'Request' }],
   status : Number,
   food_date : String
+},{
+  timestamps: true
 })
+
+foodSchema.statics.getAllSorted = function (cb) {
+  return this.find({}, cb).populate('_userId')
+}
 
 // the schema is useless so far
 // we need to create a model using it
