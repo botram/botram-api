@@ -44,6 +44,7 @@ router.post('/', userController.create);
 router.put('/:id',cektoken, userController.update);
 router.put('/:id/favbysearch',cektoken, userController.favBySearch);
 router.put('/:id/addrating',cektoken, userController.addRating);
+router.get('/:id/favourite',cektoken, userController.favourite);
 
 
 

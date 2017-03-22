@@ -39,7 +39,8 @@ Botram uses a number of open source projects to work properly:
 | GET    | api/users/:id                | show a user                    |
 | POST   | api/users                    | Create a User                  |
 | PUT    | api/users/:id                | User update Profile            |
-| PUT    | api/users/:id/favbysearch    | User favourite                 |  
+| PUT    | api/users/:id/favbysearch    | User favourite                 |
+| GET    | api/users/:id/favourite      | User Display his/her own fav   |
 | PUT    | api/users/:id/addrating      | User add Rating                |
 | DELETE | api/users/:id                | User Delete                    |
 | POST   | api/users/login              | User login                     |

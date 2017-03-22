@@ -211,5 +211,31 @@ module.exports = {
             }
             return res.status(200).json();
         });
+    },
+
+    favourite : function(req,res){
+      let user = {
+        _id : req.params.id
+      }
+      userModel.findOne(user)
+        .then(function(user){
+          if(user){
+
+            let tag = {
+             food_tags : {$in: user.fav}
+            }
+
+            foodModel.find(tag)
+            .then(function(data){
+                if(data) res.json({ success : data })
+            }).catch(function(err){
+              if(err) res.json({ err : err })
+            })
+          }
+        }).catch(function(err){
+          if(err) res.json({
+            err : err
+          })
+        })
     }
 };
