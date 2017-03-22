@@ -29,22 +29,28 @@ module.exports = {
           if(err) res.json({err : err})
         })
     },
-    read : function (req,res){
 
-      let food_date = new Date()
+    // read : function (req,res){
+    //   let food_date = new Date()
+    //   let food = {
+    //     food_date : food_date.toDateString(),
+    //     status : 1
+    //   }
+    //   model.find(food).populate('_userId')
+    //   .then(function(data){
+    //     if(data) res.json({success : data})
+    //   })
+    //   .catch(function(err){
+    //     if(err) res.json({err : err})
+    //   })
+    // },
 
-      let food = {
-        food_date : food_date.toDateString(),
-        status : 1
-      }
-      model.find(food).sort('-updatedAt').populate('_userId')
-      .then(function(data){
-        if(data) res.json({success : data})
-      })
-      .catch(function(err){
-        if(err) res.json({err : err})
+    read : (req,res) => {
+      model.getAllSorted((err,data) => {
+        res.json(data)
       })
     },
+
 
     foodDetail : function (req,res){
 
@@ -115,7 +121,7 @@ module.exports = {
       .catch(function(err){
         if(err) res.json({err : err})
       })
-    }
+    },
 
     delete : function (req,res){
       let food = {
