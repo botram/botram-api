@@ -37,8 +37,8 @@ describe('Testing CRUD - User', function () {
 
   it('result - Get all user', function (done) {
     chai.request(app)
-    .set('token',token)
     .get('/api/users/')
+    .set('token',token)
     .end(function (err, res) {
       expect(res).to.have.status(200)
       expect(res).to.be.an('object')
@@ -49,8 +49,8 @@ describe('Testing CRUD - User', function () {
 
   it('result - Show one User', function (done) {
     chai.request(app)
-    .set('token',token)
     .get('/api/users/58d1080f3a5a631b4bdfc48e')
+    .set('token',token)
     .end(function (err, res) {
       expect(res).to.have.status(200)
       expect(res).to.be.an('object')
@@ -58,36 +58,120 @@ describe('Testing CRUD - User', function () {
     })
   })
 
+
   it('result - Update User', function (done) {
 
+    let dummyUser = {
+      name: 'Bella',
+      email: 'Bella@gmail.com',
+      pic: 'Bella.png',
+      id_fb : "bnxv",
+    }
+    let dummyData = {
+      phone:"0987123445",
+      address:"Jalan Kemang raya, deket rumah gana",
+      city:"Jakarta",
+    }
+    chai.request(app)
+      .post('/api/users')
+      .send(dummyUser)
+      .end(function (err, res) {
 
-      chai.request(app)
-      .set('token',token)
-        .put('/api/users/58d228f33f3a793f0433546f')
-        .send({
-          phone:,
-          address:,
-          city:,
-        })
-        .end(function (err, res) {
+        let id = res.body.userId
 
-          expect(res).to.have.status(200)
-          expect(res).to.be.an('object')
-          expect(res.body.token).to.be.a('string')
-          expect(res.body.userId).to.be.a('string')
-          done()
-        })
+        chai.request(app)
+          .put(`/api/users/${id}`)
+          .set('token',token)
+          .send(dummyData)
+          .end(function (err, res) {
+            expect(res).to.have.status(200)
+            expect(res).to.be.an('object')
+            expect(res.body.city).to.equal(dummyData.city)
+            expect(res.body.phone).to.equal(dummyData.phone)
+            expect(res.body.address).to.equal(dummyData.address)
+            done()
+          })
+      })
   })
 
-  it('result - User Favourite', function (done) {
+  it('result - User Favourite added by Search', function (done) {
+    let dummyUser = {
+      name: 'Bella',
+      email: 'Bella@gmail.com',
+      pic: 'Bella.png',
+      id_fb : "bnxv",
+    }
+    let dummyData = {
+      search : "nasi goreng"
+    }
+    chai.request(app)
+      .post('/api/users')
+      .send(dummyUser)
+      .end(function (err, res) {
 
+        let id = res.body.userId
+
+        chai.request(app)
+          .put(`/api/users/${id}/favbysearch`)
+          .set('token',token)
+          .send(dummyData)
+          .end(function (err, res) {
+            expect(res).to.have.status(200)
+            expect(res).to.be.an('object')
+            expect(res.body.fav).to.deep.equal(dummyData.search.split(" "))
+            done()
+          })
+      })
   })
 
   it('result - User Add rating', function (done) {
 
+
+      let dummyUser = {
+        name: 'Bella',
+        email: 'Bella@gmail.com',
+        pic: 'Bella.png',
+        id_fb : "bnxv",
+      }
+
+      let dummyUser_2 = {
+        name: 'miko',
+        email: 'miko@gmail.com',
+        pic: 'miko.png',
+        id_fb : "jkniv",
+      }
+
+
+      chai.request(app)
+        .post('/api/users')
+        .send(dummyUser)
+        .end(function (err, res) {
+
+          const userA = res.body.userId
+
+          chai.request(app)
+          .post('/api/users')
+          .send(dummyUser_2)
+            .end(function (err, res) {
+                const userB = res.body.userId
+
+                let dummyData = {
+                  ratedBy: userB,
+                  score: 3
+                }
+
+                chai.request(app)
+                .put(`/api/users/${userA}/addrating`)
+                .set('token',token)
+                .send(dummyData)
+                .end(function(err,res){
+                  expect(res).to.have.status(200)
+                  expect(res).to.be.an('object')
+                  expect(res.body.rated).to.have.length.above(0)
+                  done()
+                })
+            })
+        })
   })
 
-  it('result - Delete user', function (done) {
-
-  })
 })

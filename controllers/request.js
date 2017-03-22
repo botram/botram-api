@@ -2,7 +2,7 @@ const Model = require('../models/request')
 const Food = require('../models/food')
 
 module.exports = {
-    //DISINI BUTUH ID USER
+    
     create : function(req,res){
         let food = {
           _id : req.body._foodId
@@ -65,7 +65,8 @@ module.exports = {
           item.save()
           res.json({
             request : data,
-            food : item})
+            food : item
+          })
         })
         .catch(function(err){
           if(err) res.json({err : err})
@@ -80,10 +81,12 @@ module.exports = {
             let request = {
               _id : req.body._requestId
             }
-            Model.findByIdAndRemove(request)
+            Model.findOne(request)
             .then(function(data){
               if(data)
-                res.json({success :"Request Deleted"})
+              data.status = 2
+              data.save()
+              res.json({success : data})
             })
             .catch(function(err){
               if(err) res.json({err : err})

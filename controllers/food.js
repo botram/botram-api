@@ -29,13 +29,32 @@ module.exports = {
           if(err) res.json({err : err})
         })
     },
-    read : function (req,res){
 
-      let food_date = new Date()
+    read : (req,res) => {
+      model.getAllSorted((err,data) => {
+        res.json({success : data})
+      })
+    },
+
+
+    foodDetail : function (req,res){
 
       let food = {
-        food_date : food_date.toDateString(),
-        status : 1
+        _id: req.params.id
+      }
+      model.find(food).populate('_userId')
+      .then(function(data){
+        if(data) res.json({success : data})
+      })
+      .catch(function(err){
+        if(err) res.json({err : err})
+      })
+    },
+
+    foodbyUser : function (req,res){
+
+      let food = {
+        _userId: req.params.iduser
       }
       model.find(food).populate('_userId')
       .then(function(data){
@@ -109,17 +128,21 @@ module.exports = {
        food_title : regex
       }
       let tag = {
-        food_tags : {$in: [regex]}
+       food_tags : {$in: [regex]}
       }
 
       model.find({
         $or:[food,tag]
-      }).populate('_userId ')
+      }).populate('_userId')
       .then(function(item){
-        if(item) res.json({ success : item})
+        if(item) res.json({
+          success : item
+        })
       }).catch(function(err){
 
-        if(err) res.json({err : err})
+        if(err) res.json({
+          err : err
+        })
       })
 
   }

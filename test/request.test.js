@@ -1,6 +1,5 @@
 const chai = require('chai')
 const expect = require('chai').expect
-const Request = require('supertest')
 const chaiHttp = require('chai-http')
 chai.use(chaiHttp)
 
@@ -11,20 +10,45 @@ const token =`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyIkX18iOnsic3RyaWN0TW9kZSI6d
 describe('Testing CRUD - Request', function () {
 
 it('result - Post a request', function (done) {
+
   chai.request(app)
-    .post('/api/users/request')
+  .post('/api/users/food')
     .set('token', token)
     .send({
-      _foodId: '58d0d986362503157eb7a4fc',
-      request_notes: 'Irsan testing request again !',
-      request_qty: 1,
-      status: 0
+      food_title: "Nasi Bebek Sambel Ijo",
+      food_price: "35000",
+      food_qty  : 10,
+      food_pic : "food.jpg",
+      food_tags :"pedas enak gurih",
+      food_desc : "deskripsi tentang sebuah makanan",
+      status : 1,
+      _userId : '58d1080f3a5a631b4bdfc48e'
     })
     .end(function (err, res) {
-      expect(res).to.have.status(200)
-      expect(res).to.be.an('object')
-      done()
+
+      let dummy_foodId = res.body.success._id
+
+      chai.request(app)
+        .post('/api/users/request')
+        .set('token', token)
+        .send({
+          _foodId: dummy_foodId,
+          request_notes: 'Irsan testing request again !',
+          request_qty: 1,
+        })
+        .end(function (err, res) {
+          expect(res).to.have.status(200)
+          expect(res).to.be.an('object')
+          expect(res.body.success._id).to.equal(dummy_foodId)
+          expect(res.body.success._requestId).to.have.length.above(0)
+          done()
+        })
+
+
     })
+
+
+
   })
 
 
@@ -67,25 +91,41 @@ it('result - Post a request, request_qty tidak diisi', function (done) {
     })
   })
 
-// it('result - put a request, seller menerima request dari user [syaratnya, harus post request baru untuk sebuah makanan, lalu ambil request idny, dan put disini]', function (done) {
-//   chai.request(app)
-//     .put('/api/users/request')
-      // .set('token', token)
-//     .send({
-//       _requestId : "",
-//     })
-//     .end(function (err, res) {
-//
-//
-//       expect(res).to.have.status(200);
-//       expect(res).to.be.an('object');
-//       expect(res.body).to.have.property("request")
-//       expect(res.body).to.have.property("food")
-//       expect(res.body.request.status).to.equal(1)
-//
-//       done()
-//     })
-// })
+it('result - put a request, seller menerima request dari user ', function (done) {
+
+  chai.request(app)
+  .post('/api/users/food')
+    .set('token', token)
+    .send({
+      food_title: "Nasi Bebek Sambel Ijo",
+      food_price: "35000",
+      food_qty  : 10,
+      food_pic : "food.jpg",
+      food_tags :"pedas enak gurih",
+      food_desc : "deskripsi tentang sebuah makanan",
+      _userId : '58d1080f3a5a631b4bdfc48e'
+    })
+    .end(function (err, res) {
+
+      var dummy_foodId = res.body.success._id
+
+      chai.request(app)
+        .post('/api/users/request')
+        .set('token', token)
+        .send({
+          _foodId: dummy_foodId,
+          request_notes: 'Irsan testing request again !',
+          request_qty: 1,
+        })
+        .end(function (err, res) {
+
+            //mau mendapatkan res di chai yang ke dua, malah dapat response di chai yang pertama
+
+          done()
+
+        })
+    })
+})
 
 
 
@@ -105,7 +145,7 @@ it('result - Post a request, request_qty tidak diisi', function (done) {
         .put('/api/users/request')
         .set('token', token)
         .send({
-          _requestId : ''
+          _requestId : '58d250d57e23615134b1737c'
         })
         .end(function (err, res) {
           expect(res).to.have.status(200)

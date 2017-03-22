@@ -22,7 +22,8 @@ describe('Testing CRUD - food', function () {
         food_pic : "food.jpg",
         food_tags :"pedas enak gurih",
         food_desc : "deskripsi tentang sebuah makanan",
-        status : 1
+        status : 1,
+        _userId : '58d1080f3a5a631b4bdfc48e'
       })
       .end(function (err, res) {
 
@@ -112,7 +113,6 @@ describe('Testing CRUD - food', function () {
     chai.request(app)
     .get('/api/users/food')
     .set('token', token)
-      .set('token', token)
       .end(function (err, res) {
         expect(res).to.have.status(200)
         expect(res).to.be.an('object')
@@ -125,7 +125,7 @@ describe('Testing CRUD - food', function () {
   it('result - Search food with tag "sapi"', function (done) {
 
     chai.request(app)
-    .get('/api/users/food/sapi')
+    .get('/api/users/food/byfood/sapi')
     .set('token', token)
       .end(function (err, res) {
         expect(res).to.have.status(200)
@@ -138,7 +138,7 @@ describe('Testing CRUD - food', function () {
 
   it('result - Searching food but not found', function (done) {
     chai.request(app)
-    .get('/api/users/food/something')
+    .get('/api/users/food/byfood/something')
     .set('token', token)
       .end(function (err, res) {
         expect(res).to.have.status(200)
@@ -149,6 +149,19 @@ describe('Testing CRUD - food', function () {
   })
 
   it('result - Updating food ', function (done) {
-
+    chai.request(app)
+    .put('/api/users/food/edit')
+    .set('token', token)
+    .send({
+      _foodId  : '58cf94cef868711482789cde',
+      food_pic : 'food_pic.jpg'
+    })
+      .end(function (err, res) {
+        expect(res).to.have.status(200)
+        expect(res).to.be.an('object')
+        expect(res.body).to.have.property('success')
+        expect(res.body.success.food_pic).to.equal('food_pic.jpg')
+        done()
+      })
   })
 })
