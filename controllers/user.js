@@ -48,22 +48,30 @@ module.exports = {
     /**
      * userController.create()
      */
-    create: function (req, res) {
-        var user = new userModel({    			name : req.body.name,    			email : req.body.email,          pic : req.body.pic,          id_fb: req.body.id_fb        });
 
-        user.save(function (err, user) {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Error when creating user',
-                    error: err
-                });
-            }
-            return res.status(200).json({
-              token : jwt.sign(user, 'secret'),
-              user_id : user._id
-            });
-        });
-    },
+     create: function (req, res) {
+         var user = {
+           name: req.body.name,
+           email: req.body.email,
+           pic: req.body.pic,
+           id_fb: req.body.id_fb
+         };
+
+         userModel.findOrCreate({id_fb: user.id_fb, name: user.name, email: user.email, pic: user.pic}, function(err, user, created) {
+           if (err) {
+               return res.status(500).json({
+                   message: 'Error when getting user',
+                   error: err
+               });
+           }
+           if (!created || created) {
+               return res.status(201).json({token:jwt.sign(user, 'secret'), userId: user._id})
+           }
+
+         })
+     },
+
+
 
     /**
      * userController.update()
@@ -83,7 +91,9 @@ module.exports = {
                 });
             }
 
-      			user.phone = req.body.phone ? req.body.phone : user.phone;      			user.address = req.body.address ? req.body.address : user.address;      			user.city = req.body.city ? req.body.city : user.city;
+      			user.phone = req.body.phone ? req.body.phone : user.phone;
+      			user.address = req.body.address ? req.body.address : user.address;
+      			user.city = req.body.city ? req.body.city : user.city;
             user.save(function (err, user) {
                 if (err) {
                     return res.status(500).json({
