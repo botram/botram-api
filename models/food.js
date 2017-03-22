@@ -31,7 +31,9 @@ const foodSchema = new Schema({
   food_desc  :  { type: String, required: [true, 'Deskripsi makanan harus diisi'] },
   _requestId :  [{ type: Schema.Types.ObjectId, ref :'Request' }],
   status : Number,
-  food_date : String
+  food_date : String,
+  food_city: String,
+  food_address: String
 })
 
 // the schema is useless so far
