@@ -30,24 +30,9 @@ module.exports = {
         })
     },
 
-    // read : function (req,res){
-    //   let food_date = new Date()
-    //   let food = {
-    //     food_date : food_date.toDateString(),
-    //     status : 1
-    //   }
-    //   model.find(food).populate('_userId')
-    //   .then(function(data){
-    //     if(data) res.json({success : data})
-    //   })
-    //   .catch(function(err){
-    //     if(err) res.json({err : err})
-    //   })
-    // },
-
     read : (req,res) => {
       model.getAllSorted((err,data) => {
-        res.json(data)
+        res.json({success : data})
       })
     },
 
@@ -122,7 +107,6 @@ module.exports = {
         if(err) res.json({err : err})
       })
     },
-
     delete : function (req,res){
       let food = {
         _id : req.body._foodId
@@ -144,17 +128,21 @@ module.exports = {
        food_title : regex
       }
       let tag = {
-        food_tags : {$in: [regex]}
+       food_tags : {$in: [regex]}
       }
 
       model.find({
         $or:[food,tag]
-      }).populate('_userId ')
+      }).populate('_userId')
       .then(function(item){
-        if(item) res.json({ success : item})
+        if(item) res.json({
+          success : item
+        })
       }).catch(function(err){
 
-        if(err) res.json({err : err})
+        if(err) res.json({
+          err : err
+        })
       })
 
   }
