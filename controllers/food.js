@@ -42,7 +42,7 @@ module.exports = {
       let food = {
         _id: req.params.id
       }
-      model.find(food).populate('_userId')
+      model.findOne(food).populate('_userId')
       .then(function(data){
         if(data) res.json(data)
       })

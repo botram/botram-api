@@ -48,16 +48,14 @@ Botram uses a number of open source projects to work properly:
 |--------|------------------------------|--------------------------------|
 | GET    | api/users                    | Users list                     |
 | GET    | api/users/:id                | show a user                    |
-| POST   | api/users                    | Create a User                  |
+| POST   | api/users                    | Create a User / login a user   |
 | PUT    | api/users/:id                | User update Profile            |
-| PUT    | api/users/:id/favbysearch    | User favourite                 |
+| PUT    | api/users/:id/favbysearch    | User add favourite tags        |
 | GET    | api/users/:id/favourite      | User Display his/her own fav   |
 | PUT    | api/users/:id/addrating      | User add Rating                |
 | DELETE | api/users/:id                | User Delete                    |
-| POST   | api/users/login              | User login                     |
-| POST   | api/users/logout             | User logout                    |
 | POST   | api/users/food               | User add food                  |
-| PUT    | api/users/food/              | User updating food             |
+| PUT    | api/users/food               | User updating food             |
 | GET    | api/users/food/byuser/:iduser| User search user making food   |
 | GET    | api/users/food/byfood/:food  | User search food               |
 | GET    | api/users/food               | display all food               |
