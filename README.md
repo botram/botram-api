@@ -33,25 +33,26 @@ Botram uses a number of open source projects to work properly:
 * coming soon...
 
 ### API services
-| Method | Endpoint                     | Description        |
-|--------|------------------------------|--------------------|
-| GET    | api/users                    | Users list         |
-| GET    | api/users/:id                | show a user        |
-| POST   | api/users                    | Create a User      |
-| PUT    | api/users/:id                | User update Profile|
-| PUT    | api/users/:id/favbysearch    | User favourite     |  
-| PUT    | api/users/:id/addrating      | User add Rating    |
-| DELETE | api/users/:id                | User Delete        |
-| POST   | api/users/login              | User login         |
-| POST   | api/users/logout             | User logout        |
-| POST   | api/users/food               | User add food      |
-| PUT    | api/users/food/              | User updating food |
-| GET    | api/users/food/:food         | User search food   |
-| GET    | api/users/food               | display all food   |
-| POST   | api/users/request            | User Req food      |
-| GET    | api/users/request            | Display request    |
-| PUT    | api/users/request            | Seller confirmation|
-| PUT    | api/users/request            | Seller reject      |
+| Method | Endpoint                     | Description                    |
+|--------|------------------------------|--------------------------------|
+| GET    | api/users                    | Users list                     |
+| GET    | api/users/:id                | show a user                    |
+| POST   | api/users                    | Create a User                  |
+| PUT    | api/users/:id                | User update Profile            |
+| PUT    | api/users/:id/favbysearch    | User favourite                 |  
+| PUT    | api/users/:id/addrating      | User add Rating                |
+| DELETE | api/users/:id                | User Delete                    |
+| POST   | api/users/login              | User login                     |
+| POST   | api/users/logout             | User logout                    |
+| POST   | api/users/food               | User add food                  |
+| PUT    | api/users/food/              | User updating food             |
+| GET    | api/users/food/:food         | User search food               |
+| GET    | api/users/food               | display all food               |
+| PUT    | api/users/food/edit          | User editing picture of food   |
+| POST   | api/users/request            | User Req food                  |
+| GET    | api/users/request            | Display request                |
+| PUT    | api/users/request            | Seller confirmation            |
+| PUT    | api/users/request            | Seller reject                  |
 
 
 ### User Stories

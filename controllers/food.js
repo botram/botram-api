@@ -87,8 +87,7 @@ module.exports = {
       .catch(function(err){
         if(err) res.json({err : err})
       })
-    }
-
+    },
     delete : function (req,res){
       let food = {
         _id : req.body._foodId
