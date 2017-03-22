@@ -22,7 +22,7 @@ module.exports = {
         model.create(food)
         .then(function(data){
           if(data) {
-            res.json({success : data})
+            res.json(data)
           }
         })
         .catch(function(err){
@@ -32,7 +32,7 @@ module.exports = {
 
     read : (req,res) => {
       model.getAllSorted((err,data) => {
-        res.json({success : data})
+        res.json(data)
       })
     },
 
@@ -44,7 +44,7 @@ module.exports = {
       }
       model.find(food).populate('_userId')
       .then(function(data){
-        if(data) res.json({success : data})
+        if(data) res.json(data)
       })
       .catch(function(err){
         if(err) res.json({err : err})
@@ -58,7 +58,7 @@ module.exports = {
       }
       model.find(food).populate('_userId')
       .then(function(data){
-        if(data) res.json({success : data})
+        if(data) res.json(data)
       })
       .catch(function(err){
         if(err) res.json({err : err})
@@ -80,7 +80,7 @@ module.exports = {
           data.food_qty = qty
           data.food_date = date.toDateString()
           data.save()
-          res.json({success : data})
+          res.json(data)
         }
       })
       .catch(function(err){
@@ -100,7 +100,7 @@ module.exports = {
         if(data){
           data.food_pic = food_pic
           data.save()
-          res.json({success : data})
+          res.json(data)
         }
       })
       .catch(function(err){
