@@ -48,6 +48,7 @@ module.exports = {
     /**
      * userController.create()
      */
+
      create: function (req, res) {
          var user = {
            name: req.body.name,
@@ -71,6 +72,7 @@ module.exports = {
      },
 
 
+
     /**
      * userController.update()
      */
@@ -89,7 +91,9 @@ module.exports = {
                 });
             }
 
-      			user.phone = req.body.phone ? req.body.phone : user.phone;      			user.address = req.body.address ? req.body.address : user.address;      			user.city = req.body.city ? req.body.city : user.city;
+      			user.phone = req.body.phone ? req.body.phone : user.phone;
+      			user.address = req.body.address ? req.body.address : user.address;
+      			user.city = req.body.city ? req.body.city : user.city;
             user.save(function (err, user) {
                 if (err) {
                     return res.status(500).json({
