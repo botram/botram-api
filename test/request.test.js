@@ -97,7 +97,7 @@ it('result - put a request, seller menerima request dari user ', function (done)
   .post('/api/users/food')
     .set('token', token)
     .send({
-      food_title: "Nasi Bebek Sambel Ijo",
+      food_title: "Nasi Bebek Sambel IKAN",
       food_price: "35000",
       food_qty  : 10,
       food_pic : "food.jpg",
@@ -113,14 +113,27 @@ it('result - put a request, seller menerima request dari user ', function (done)
         .post('/api/users/request')
         .set('token', token)
         .send({
-          _foodId: dummy_foodId,
+          _foodId : dummy_foodId,
+          _userId : '58d1080f3a5a631b4bdfc48e',
           request_notes: 'Irsan testing request again !',
           request_qty: 1,
         })
-        .end(function (err, res) {
+        .end(function (err, response) {
+          let req = {
+            _requestId : response.body.request._id
+          }
 
-            //mau mendapatkan res di chai yang ke dua, malah dapat response di chai yang pertama
+          chai.request(app)
+            .put('/api/users/request')
+            .set('token', token)
+            .send(req)
+            .end(function(err,res){
 
+              expect(res).to.have.status(200)
+              expect(res).to.be.an('object')
+              expect(res.body).to.be.an('object')
+              expect(res.body.request.status).to.equal(1)
+            })
           done()
 
         })
