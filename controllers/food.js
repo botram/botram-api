@@ -52,6 +52,7 @@ module.exports = {
         _id : req.body._foodId
       }
       let qty = req.body.food_qty
+      let pic = req.body.food_pic
       let date = new Date()
 
       model.findOne(food)
@@ -59,6 +60,7 @@ module.exports = {
         if(data){
           data.status = 1
           data.food_qty = qty
+          data.food_pic = pic
           data.food_date = date.toDateString()
           data.save()
           res.json({success : data})
