@@ -2,7 +2,7 @@ const Model = require('../models/request')
 const Food = require('../models/food')
 
 module.exports = {
-    
+
     create : function(req,res){
         let food = {
           _id : req.body._foodId
@@ -21,7 +21,11 @@ module.exports = {
             .then(function(item){
               item._requestId.push(data._id)
               item.save()
-              res.json({success : item})
+
+              res.json({
+                success : item,
+                request : data
+              })
             })
             .catch(function(err){
               if(err) res.json({err : err})

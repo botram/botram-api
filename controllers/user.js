@@ -74,21 +74,6 @@ module.exports = {
 
           }
         })
-        // userModel.findOrCreate(user, function(err, user, created) {
-        //   if (err) {
-        //       return res.status(500).json({
-        //           message: 'Error when getting user',
-        //           error: err
-        //       });
-        //   }
-        //   if (!created || created) {
-        //       return res.status(200).json({
-        //         token : jwt.sign(user, 'secret'),
-        //         userId : user._id
-        //       })
-        //   }
-        //
-        // })
     },
 
     /**
