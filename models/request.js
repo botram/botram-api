@@ -3,19 +3,19 @@ var Schema = mongoose.Schema
 
 // create a schema
 var requestSchema = new Schema({
-  _userId: { type: Schema.Types.ObjectId, ref :'User' },
-  request_notes : String,
-  request_qty   :  {
+  _userId: { type: Schema.Types.ObjectId, ref: 'User' },
+  request_notes: String,
+  request_qty: {
     type: Number,
     validate: {
-          validator: function(v) {
-            if(typeof(v) === "string") return false
-          },
-          message: 'Permintaan makanan harus dalam jumlah angka'
-        },
-  required   :  [ true, 'Permintaan makanan harus diisi']
+      validator: function (v) {
+        if (typeof (v) === 'string') return false
+      },
+      message: 'Permintaan makanan harus dalam jumlah angka'
+    },
+    required: [ true, 'Permintaan makanan harus diisi']
   },
-  status : Number
+  status: Number
 })
 
 // the schema is useless so far
