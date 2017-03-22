@@ -48,23 +48,30 @@ module.exports = {
     /**
      * userController.create()
      */
-    create: function (req, res) {
-        var user = {    			name : req.body.name,    			email : req.body.email,          pic : req.body.pic,
-          id_fb: req.body.id_fb        };
 
-        userModel.findOrCreate({id_fb: user.id_fb}, function(err, user, created) {
-          if (err) {
-              return res.status(500).json({
-                  message: 'Error when getting user',
-                  error: err
-              });
-          }
-          if (!created || created) {
-              return res.status(201).json(jwt.sign(user, 'secret'))
-          }
-          
-        })
-    },
+     create: function (req, res) {
+         var user = {
+           name: req.body.name,
+           email: req.body.email,
+           pic: req.body.pic,
+           id_fb: req.body.id_fb
+         };
+
+         userModel.findOrCreate({id_fb: user.id_fb, name: user.name, email: user.email, pic: user.pic}, function(err, user, created) {
+           if (err) {
+               return res.status(500).json({
+                   message: 'Error when getting user',
+                   error: err
+               });
+           }
+           if (!created || created) {
+               return res.status(201).json({token:jwt.sign(user, 'secret'), userId: user._id})
+           }
+
+         })
+     },
+
+
 
     /**
      * userController.update()
@@ -84,7 +91,9 @@ module.exports = {
                 });
             }
 
-      			user.phone = req.body.phone ? req.body.phone : user.phone;      			user.address = req.body.address ? req.body.address : user.address;      			user.city = req.body.city ? req.body.city : user.city;
+      			user.phone = req.body.phone ? req.body.phone : user.phone;
+      			user.address = req.body.address ? req.body.address : user.address;
+      			user.city = req.body.city ? req.body.city : user.city;
             user.save(function (err, user) {
                 if (err) {
                     return res.status(500).json({
@@ -139,8 +148,15 @@ module.exports = {
      * userController.favBySearch()
      */
     addRating: function (req, res) {
-        var id = req.params.id;
-        userModel.findOne({_id: id}, function (err, user) {
+        var data = {
+          _id : req.params.id
+        };
+
+        var rating = {
+          ratedBy: req.body.ratedBy,
+          score: req.body.score
+        }
+        userModel.findOne(data, function (err, user) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when getting user',
@@ -152,16 +168,22 @@ module.exports = {
                     message: 'No such user'
                 });
             }
-
             var arrTemp = []
-            user.rating.map(item => arrTemp.push(item.email))
+            user.rated.map(item => arrTemp.push(item.ratedBy))
 
-            if(user.rating.length === 0){
-              user.rating.push({email: req.body.email, score: req.body.score})
-            } else if(arrTemp.indexOf(req.body.email) == -1 ){
-              user.rating.push({email: req.body.email, score: req.body.score})
+            if(user.rated.length === 0){
+              user.rated.push(rating)
+            } else if(arrTemp.indexOf(rating.ratedBy) == -1 ){
+              user.rated.push(rating)
             }
 
+            var total = 0
+            user.rated.forEach((item)=>{
+              total += parseInt(item.score)
+            })
+
+            var result = total / user.rated.length
+            user.rating = result
             user.save(function (err, user) {
                 if (err) {
                     return res.status(500).json({
@@ -169,7 +191,6 @@ module.exports = {
                         error: err
                     });
                 }
-
                 return res.json(user);
             });
         });
