@@ -27,12 +27,19 @@ const foodSchema = new Schema({
     },
     required: [ true, 'Porsi makanan harus diisi']
   },
-  food_tags: [String],
-  food_desc: { type: String, required: [true, 'Deskripsi makanan harus diisi'] },
-  _requestId: [{ type: Schema.Types.ObjectId, ref: 'Request' }],
-  status: Number,
-  food_date: String
+
+  food_tags  :  [String],
+  food_desc  :  { type: String, required: [true, 'Deskripsi makanan harus diisi'] },
+  _requestId :  [{ type: Schema.Types.ObjectId, ref :'Request' }],
+  status : Number,
+  food_date : String
+},{
+  timestamps: true
 })
+
+foodSchema.statics.getAllSorted = function (cb) {
+  return this.find({}, null, {sort: '-updatedAt'}, cb).populate('_userId')
+}
 
 // the schema is useless so far
 // we need to create a model using it

@@ -11,15 +11,25 @@ Botram-api is an API service for mobile app called "Botram", developed by :
 
 
 # NEW FEATURE !
+`# wednesday 21/03/2017`
+ wiring those API to _MOBILE APP_
 
-  these are new feature from botram API
-   - User can post their food ! but not with the pic
+
+`# tuesday 21/03/2017`
+  these are feature from botram API
+ - User can have a favourite food !
+ - User can search other user food list !
+
+`# Monday 20/03/2017`
+these are feature from botram API
+   - User can post their food ! with the picture !
    - User can Request a food they wanted !
    - User can Accept / non - Accept request from another user !
    - User can see all the food their created !
    - User can see all requested food !
    - User can re-sell their sold out food !
    - User can search food !
+
 
 ### Tech
 
@@ -30,28 +40,32 @@ Botram uses a number of open source projects to work properly:
 * [Express](https://expressjs.com/) - fast node.js network app framework !
 * [mongoose](http://mongoosejs.com/) - Awesome mongoose !
 * [mongoDB](https://www.mongodb.com/) - Awesome mongoDB !
-* coming soon...
+* [React-native](https://facebook.github.io/react-native/) - Awesome future technology by [facebook](http://facebook.com) !
+
 
 ### API services
-| Method | Endpoint                  | Description        |
-|--------|---------------------------|--------------------|
-| GET    | /users                    | Users list         |
-| GET    | /users/:id                | show a user        |
-| POST   | /users                    | Create a User      |
-| PUT    | /users/:id                | User update Profile|
-| PUT    | /users/:id/favbysearch    | User favourite     |  
-| PUT    | /users/:id/addrating      | User add Rating    |
-| DELETE | /users/:id                | User Delete        |
-| POST   | /users/login              | User login         |
-| POST   | /users/logout             | User logout        |
-| POST   | /users/food               | User add food      |
-| PUT    | /users/food/              | User updating food |
-| GET    | /users/food/:food         | User search food   |
-| GET    | /users/food               | display all food   |
-| POST   | /users/request            | User Req food      |
-| GET    | /users/request            | Display request    |
-| PUT    | /users/request            | Seller confirmation|
-| DELETE | /users/request            | Seller reject      |
+| Method | Endpoint                     | Description                    |
+|--------|------------------------------|--------------------------------|
+| GET    | api/users                    | Users list                     |
+| GET    | api/users/:id                | show a user                    |
+| POST   | api/users                    | Create a User                  |
+| PUT    | api/users/:id                | User update Profile            |
+| PUT    | api/users/:id/favbysearch    | User favourite                 |
+| GET    | api/users/:id/favourite      | User Display his/her own fav   |
+| PUT    | api/users/:id/addrating      | User add Rating                |
+| DELETE | api/users/:id                | User Delete                    |
+| POST   | api/users/login              | User login                     |
+| POST   | api/users/logout             | User logout                    |
+| POST   | api/users/food               | User add food                  |
+| PUT    | api/users/food/              | User updating food             |
+| GET    | api/users/food/byuser/:iduser| User search user making food   |
+| GET    | api/users/food/byfood/:food  | User search food               |
+| GET    | api/users/food               | display all food               |
+| PUT    | api/users/food/edit          | User editing picture of food   |
+| POST   | api/users/request            | User Req food                  |
+| GET    | api/users/request            | Display request                |
+| PUT    | api/users/request            | Seller confirmation            |
+| PUT    | api/users/request/reject     | Seller reject                  |
 
 
 ### User Stories
