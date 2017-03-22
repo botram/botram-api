@@ -26,6 +26,7 @@ router.get('/food/:id', cektoken, controllers.foodDetail)
 router.get('/food/byuser/:iduser', cektoken, controllers.foodbyUser)
 router.post('/food',cektoken, controllers.create);
 router.put('/food',cektoken, controllers.update)
+router.put('/food/edit',cektoken, controllers.edit)
 router.delete('/food',cektoken, controllers.delete)
 router.get('/food/:food',cektoken, controllers.browse);
 

@@ -97,6 +97,26 @@ module.exports = {
       })
     },
 
+    edit : function (req,res){
+
+      let food = {
+        _id : req.body._foodId
+      }
+       let food_pic = req.body.food_pic
+
+      model.findOne(food)
+      .then(function(data){
+        if(data){
+          data.food_pic = food_pic
+          data.save()
+          res.json({success : data})
+        }
+      })
+      .catch(function(err){
+        if(err) res.json({err : err})
+      })
+    }
+
     delete : function (req,res){
       let food = {
         _id : req.body._foodId
