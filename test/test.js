@@ -41,6 +41,7 @@ describe('Testing CRUD - food', function () {
         status: 1
       })
       .end(function (err, res) {
+        console.log(res.body);
         expect(res).to.have.status(200)
         expect(res).to.be.an('object')
         expect(res.body.success).to.have.property('food_title')
@@ -116,7 +117,7 @@ describe('Testing CRUD - food', function () {
 
   it('result - Search food with tag "sapi"', function (done) {
     chai.request(app)
-      .post('/users/food')
+      .post('/api/users/food')
       .send({
         food_title: 'food title',
         food_price: 'some String',
@@ -154,9 +155,9 @@ describe('Testing CRUD - food', function () {
       .get('/api/users/food/something')
 
       .end(function (err, res) {
-        // expect(res).to.have.status(200)
-        // expect(res).to.be.an('object')
-        // expect(res.body).to.have.property('success')
+        expect(res).to.have.status(200)
+        expect(res).to.be.an('object')
+        expect(res.body).to.have.property('success')
         done()
       })
   })
