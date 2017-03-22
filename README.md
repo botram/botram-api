@@ -33,25 +33,25 @@ Botram uses a number of open source projects to work properly:
 * coming soon...
 
 ### API services
-| Method | Endpoint                  | Description        |
-|--------|---------------------------|--------------------|
-| GET    | /users                    | Users list         |
-| GET    | /users/:id                | show a user        |
-| POST   | /users                    | Create a User      |
-| PUT    | /users/:id                | User update Profile|
-| PUT    | /users/:id/favbysearch    | User favourite     |  
-| PUT    | /users/:id/addrating      | User add Rating    |
-| DELETE | /users/:id                | User Delete        |
-| POST   | /users/login              | User login         |
-| POST   | /users/logout             | User logout        |
-| POST   | /users/food               | User add food      |
-| PUT    | /users/food/              | User updating food |
-| GET    | /users/food/:food         | User search food   |
-| GET    | /users/food               | display all food   |
-| POST   | /users/request            | User Req food      |
-| GET    | /users/request            | Display request    |
-| PUT    | /users/request            | Seller confirmation|
-| DELETE | /users/request            | Seller reject      |
+| Method | Endpoint                     | Description        |
+|--------|------------------------------|--------------------|
+| GET    | api/users                    | Users list         |
+| GET    | api/users/:id                | show a user        |
+| POST   | api/users                    | Create a User      |
+| PUT    | api/users/:id                | User update Profile|
+| PUT    | api/users/:id/favbysearch    | User favourite     |  
+| PUT    | api/users/:id/addrating      | User add Rating    |
+| DELETE | api/users/:id                | User Delete        |
+| POST   | api/users/login              | User login         |
+| POST   | api/users/logout             | User logout        |
+| POST   | api/users/food               | User add food      |
+| PUT    | api/users/food/              | User updating food |
+| GET    | api/users/food/:food         | User search food   |
+| GET    | api/users/food               | display all food   |
+| POST   | api/users/request            | User Req food      |
+| GET    | api/users/request            | Display request    |
+| PUT    | api/users/request            | Seller confirmation|
+| DELETE | api/users/request            | Seller reject      |
 
 
 ### User Stories
