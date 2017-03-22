@@ -37,6 +37,34 @@ module.exports = {
         food_date : food_date.toDateString(),
         status : 1
       }
+      model.find(food).sort('-updatedAt').populate('_userId')
+      .then(function(data){
+        if(data) res.json({success : data})
+      })
+      .catch(function(err){
+        if(err) res.json({err : err})
+      })
+    },
+
+    foodDetail : function (req,res){
+
+      let food = {
+        _id: req.params.id
+      }
+      model.find(food).populate('_userId')
+      .then(function(data){
+        if(data) res.json({success : data})
+      })
+      .catch(function(err){
+        if(err) res.json({err : err})
+      })
+    },
+
+    foodbyUser : function (req,res){
+
+      let food = {
+        _userId: req.params.iduser
+      }
       model.find(food).populate('_userId')
       .then(function(data){
         if(data) res.json({success : data})
@@ -52,7 +80,6 @@ module.exports = {
         _id : req.body._foodId
       }
       let qty = req.body.food_qty
-      let pic = req.body.food_pic
       let date = new Date()
 
       model.findOne(food)
@@ -60,7 +87,6 @@ module.exports = {
         if(data){
           data.status = 1
           data.food_qty = qty
-          data.food_pic = pic
           data.food_date = date.toDateString()
           data.save()
           res.json({success : data})

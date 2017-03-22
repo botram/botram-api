@@ -33,6 +33,8 @@ const foodSchema = new Schema({
   _requestId :  [{ type: Schema.Types.ObjectId, ref :'Request' }],
   status : Number,
   food_date : String
+},{
+  timestamps: true
 })
 
 // the schema is useless so far
