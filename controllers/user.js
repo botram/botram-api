@@ -53,22 +53,40 @@ module.exports = {
 
         var user = {    			name : req.body.name,    			email : req.body.email,          pic : req.body.pic,
           id_fb: req.body.id_fb,          city : "",          address :"",          phone : ""        };
-
-        userModel.findOrCreate(user, function(err, user, created) {
+        userModel.findOne(user, function(err, user) {
           if (err) {
-              return res.status(500).json({
-                  message: 'Error when getting user',
-                  error: err
-              });
+            return res.status(500).json({
+                message: 'Error when getting user',
+                error: err
+            });
+          } else if(user) {
+            return res.status(200).json({
+              token : jwt.sign(user, 'secret'),
+              userId : user._id
+            })
+          } else if(!user) {
+            const newUser = userModel.create(user)
+            return res.status(200).json({
+              token : jwt.sign(user, 'secret'),
+              userId : newUser._id
+            })
           }
-          if (!created || created) {
-              return res.status(200).json({
-                token : jwt.sign(user, 'secret'),
-                userId : user._id
-              })
-          }
-
         })
+        // userModel.findOrCreate(user, function(err, user, created) {
+        //   if (err) {
+        //       return res.status(500).json({
+        //           message: 'Error when getting user',
+        //           error: err
+        //       });
+        //   }
+        //   if (!created || created) {
+        //       return res.status(200).json({
+        //         token : jwt.sign(user, 'secret'),
+        //         userId : user._id
+        //       })
+        //   }
+        //
+        // })
     },
 
     /**
