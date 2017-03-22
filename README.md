@@ -51,7 +51,7 @@ Botram uses a number of open source projects to work properly:
 | POST   | api/users/request            | User Req food      |
 | GET    | api/users/request            | Display request    |
 | PUT    | api/users/request            | Seller confirmation|
-| DELETE | api/users/request            | Seller reject      |
+| PUT    | api/users/request            | Seller reject      |
 
 
 ### User Stories

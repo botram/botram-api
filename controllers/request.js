@@ -75,7 +75,7 @@ module.exports = {
         if(err) res.json({err : err})
       })
     },
-    delete : function(req,res){
+    reject : function(req,res){
 
             let request = {
               _id : req.body._requestId

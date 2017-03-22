@@ -62,7 +62,7 @@ module.exports = {
               });
           }
           if (!created || created) {
-              return res.status(201).json({
+              return res.status(200).json({
                 token : jwt.sign(user, 'secret'),
                 userId : user._id
               })

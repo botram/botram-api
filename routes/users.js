@@ -3,19 +3,7 @@ var router = express.Router();
 const controllers = require('../controllers/food')
 const requestController = require('../controllers/request')
 const userController = require('../controllers/user');
-// const multer = require('multer');
 
-// var storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, './public/images/')
-//   },
-//   filename: function (req, file, cb) {
-// console.log("masuk");
-//     cb(null, 'botram-food' + '-' + Date.now() + '.' + file.mimetype.split('/')[1])
-//   }
-// })
-// , multer({ storage: storage }).single('picture')
-// KALAU upload file S3 sudah berhasil , di uncomment , dan dipasang sebagai middleware di end point POST /users/food
 
 
 /* GET users listing. */
@@ -28,7 +16,7 @@ router.get('/food/:food', controllers.browse);
 router.post('/request', requestController.create)
 router.get('/request', requestController.read)
 router.put('/request', requestController.update)
-router.delete('/request',requestController.delete)
+router.put('/request',requestController.reject)
 
 
 router.get('/', userController.list);
