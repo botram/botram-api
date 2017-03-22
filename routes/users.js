@@ -5,7 +5,6 @@ const requestController = require('../controllers/request')
 const userController = require('../controllers/user');
 const jwt = require('jsonwebtoken');
 const cektoken = (req,res,next) => {
-  console.log(req.header('token'))
   if(!req.header('token')) {
     res.send('Unauthorized')
   } else {
