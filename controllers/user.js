@@ -51,9 +51,9 @@ module.exports = {
 
     create: function (req, res) {
 
-        var user = {    			name : req.body.name,    			email : req.body.email,          pic : req.body.pic,
+        var userData = {    			name : req.body.name,    			email : req.body.email,          pic : req.body.pic,
           id_fb: req.body.id_fb,          city : "",          address :"",          phone : ""        };
-        userModel.findOne(user, function(err, user) {
+        userModel.findOne(userData, function(err, user) {
           if (err) {
             return res.status(500).json({
                 message: 'Error when getting user',
@@ -65,11 +65,13 @@ module.exports = {
               userId : user._id
             })
           } else if(!user) {
-            const newUser = userModel.create(user)
-            return res.status(200).json({
-              token : jwt.sign(user, 'secret'),
-              userId : newUser._id
+            const newUser = userModel.create(userData).then(data => {
+              return res.status(200).json({
+                token : jwt.sign(data, 'secret'),
+                userId : data._id
+              })
             })
+
           }
         })
         // userModel.findOrCreate(user, function(err, user, created) {
