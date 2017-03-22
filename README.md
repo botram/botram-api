@@ -46,13 +46,14 @@ Botram uses a number of open source projects to work properly:
 | POST   | api/users/logout             | User logout                    |
 | POST   | api/users/food               | User add food                  |
 | PUT    | api/users/food/              | User updating food             |
-| GET    | api/users/food/:food         | User search food               |
+| GET    | api/users/food/byuser/:iduser| User search user making food   |
+| GET    | api/users/food/byfood/:food  | User search food               |
 | GET    | api/users/food               | display all food               |
 | PUT    | api/users/food/edit          | User editing picture of food   |
 | POST   | api/users/request            | User Req food                  |
 | GET    | api/users/request            | Display request                |
 | PUT    | api/users/request            | Seller confirmation            |
-| PUT    | api/users/request            | Seller reject                  |
+| PUT    | api/users/request/reject     | Seller reject                  |
 
 
 ### User Stories
