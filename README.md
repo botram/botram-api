@@ -11,15 +11,25 @@ Botram-api is an API service for mobile app called "Botram", developed by :
 
 
 # NEW FEATURE !
+`# wednesday 21/03/2017`
+ wiring those API to _MOBILE APP_
 
-  these are new feature from botram API
-   - User can post their food ! but not with the pic
+
+`# tuesday 21/03/2017`
+  these are feature from botram API
+ - User can have a favourite food !
+ - User can search other user food list !
+
+`# Monday 20/03/2017`
+these are feature from botram API
+   - User can post their food ! with the picture !
    - User can Request a food they wanted !
    - User can Accept / non - Accept request from another user !
    - User can see all the food their created !
    - User can see all requested food !
    - User can re-sell their sold out food !
    - User can search food !
+
 
 ### Tech
 
@@ -30,7 +40,8 @@ Botram uses a number of open source projects to work properly:
 * [Express](https://expressjs.com/) - fast node.js network app framework !
 * [mongoose](http://mongoosejs.com/) - Awesome mongoose !
 * [mongoDB](https://www.mongodb.com/) - Awesome mongoDB !
-* coming soon...
+* [React-native](https://facebook.github.io/react-native/) - Awesome future technology by [facebook](http://facebook.com) !
+
 
 ### API services
 | Method | Endpoint                     | Description                    |
