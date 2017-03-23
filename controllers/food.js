@@ -111,7 +111,7 @@ module.exports = {
       let food = {
         _id : req.body._foodId
       }
-      Model.findByIdAndRemove(food)
+      model.findByIdAndRemove(food)
       .then(function(data){
         if(data) res.json({success : "Data Deleted"})
       })
