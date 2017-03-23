@@ -56,7 +56,7 @@ Botram uses a number of open source projects to work properly:
 | PUT    | api/users/:id/favbysearch    | User add favourite tags        |
 | GET    | api/users/:id/favourite      | User Display his/her own fav   |
 | PUT    | api/users/:id/addrating      | User add Rating                |
-| DELETE | api/users/:id                | User Delete                    |
+| DELETE | api/users/food               | User Delete food               |
 | POST   | api/users/food               | User add food                  |
 | PUT    | api/users/food               | User updating food             |
 | GET    | api/users/food/byuser/:iduser| User search user making food   |
