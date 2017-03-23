@@ -20,14 +20,16 @@ describe('Testing CRUD - food', function () {
         food_price: "35000",
         food_qty  : 3,
         food_pic : "food.jpg",
-        food_tags :"pedas enak gurih",
+        food_tags :"sapi enak gurih",
         food_desc : "deskripsi tentang sebuah makanan",
         status : 1,
         _userId : '58d1080f3a5a631b4bdfc48e'
       })
       .end(function (err, res) {
+
         expect(res).to.have.status(200);
         expect(res).to.be.an('object');
+
         done()
       })
   })
@@ -176,18 +178,39 @@ describe('Testing CRUD - food', function () {
 
   it('result - Updating food ', function (done) {
     chai.request(app)
-    .put('/api/users/food/edit')
-    .set('token', token)
-    .send({
-      _foodId  : '58cf94cef868711482789cde',
-      food_pic : 'food_pic.jpg'
-    })
-      .end(function (err, res) {
-        expect(res).to.have.status(200)
-        expect(res).to.be.an('object')
-        expect(res.body.food_pic).to.equal('food_pic.jpg')
-        done()
+    .post('/api/users/food')
+      .set('token', token)
+      .send({
+        food_title: "Nasi Bebek Sambel Ijo",
+        food_price: "35000",
+        food_qty  : 3,
+        food_pic : "food.jpg",
+        food_tags :"sapi enak gurih",
+        food_desc : "deskripsi tentang sebuah makanan",
+        status : 1,
+        _userId : '58d1080f3a5a631b4bdfc48e'
       })
+      .end(function (err, res) {
+
+        const _foodId = res.body._id
+
+        chai.request(app)
+        .put('/api/users/food/edit')
+        .set('token', token)
+        .send({
+          _foodId  : _foodId,
+          food_pic : 'food_pic.jpg'
+        })
+        .end(function (err, res) {
+            expect(res).to.have.status(200)
+            expect(res).to.be.an('object')
+            expect(res.body.food_pic).to.equal('food_pic.jpg')
+            done()
+          })
+      })
+
+
+
   })
 
 })

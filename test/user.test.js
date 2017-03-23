@@ -49,14 +49,28 @@ describe('Testing CRUD - User', function () {
   })
 
   it('result - Show one User', function (done) {
+
     chai.request(app)
-    .get('/api/users/58d1080f3a5a631b4bdfc48e')
-    .set('token',token)
-    .end(function (err, res) {
-      expect(res).to.have.status(200)
-      expect(res).to.be.an('object')
-      done()
-    })
+      .post('/api/users')
+      .send({
+        name: 'budi',
+    			email: 'budi@gmail.com',
+        pic: 'budi.png',
+        id_fb : "12345"
+      })
+      .end(function (err, res) {
+        var userId = res.body.userId
+        chai.request(app)
+        .get(`/api/users/${userId}`)
+        .set('token',token)
+        .end(function (err, res) {
+          expect(res).to.have.status(200)
+          expect(res).to.be.an('object')
+          done()
+        })
+      })
+
+
   })
 
 
