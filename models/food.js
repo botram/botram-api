@@ -37,6 +37,7 @@ const foodSchema = new Schema({
   timestamps: true
 })
 
+
 foodSchema.statics.getAllSorted = function (cb) {
   return this.find({}, null, {sort: '-updatedAt'}, cb).populate('_userId')
 }
