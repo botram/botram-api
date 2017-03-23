@@ -53,7 +53,7 @@ module.exports = {
 
         var userData = {    			name : req.body.name,    			email : req.body.email,          pic : req.body.pic,
           id_fb: req.body.id_fb,          city : "",          address :"",          phone : "",          rating : 0        };
-        userModel.findOne(userData, function(err, user) {
+        userModel.findOne(userData._id, function(err, user) {
           if (err) {
             return res.status(500).json({
                 message: 'Error when getting user',
