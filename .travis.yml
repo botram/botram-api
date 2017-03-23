@@ -11,6 +11,7 @@ deploy:
   region: ap-southeast-1
   app: botram-api
   env: dev
+  bucket_name : elasticbeanstalk-ap-southeast-1-697693785817
   on:
     repo: botram/botram-api
     branch: development
