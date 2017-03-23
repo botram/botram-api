@@ -53,19 +53,21 @@ module.exports = {
 
         var userData = {    			name : req.body.name,    			email : req.body.email,          pic : req.body.pic,
           id_fb: req.body.id_fb,          city : "",          address :"",          phone : "",          rating : 0        };
-        userModel.findOne(userData._id, function(err, user) {
+        userModel.findOne({id_fb:userData.id_fb}, function(err, user) {
           if (err) {
             return res.status(500).json({
                 message: 'Error when getting user',
                 error: err
             });
           } else if(user) {
+            console.log(user);
             return res.status(200).json({
               token : jwt.sign(user, 'secret'),
               userId : user._id
             })
           } else if(!user) {
             const newUser = userModel.create(userData).then(data => {
+              console.log(data);
               return res.status(200).json({
                 token : jwt.sign(data, 'secret'),
                 userId : data._id
