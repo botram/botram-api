@@ -26,7 +26,7 @@ it('result - Post a request', function (done) {
     })
     .end(function (err, res) {
 
-      let dummy_foodId = res.body.success._id
+      let dummy_foodId = res.body._id
 
       chai.request(app)
         .post('/api/users/request')
@@ -43,12 +43,7 @@ it('result - Post a request', function (done) {
           expect(res.body.success._requestId).to.have.length.above(0)
           done()
         })
-
-
     })
-
-
-
   })
 
 
@@ -107,7 +102,7 @@ it('result - put a request, seller menerima request dari user ', function (done)
     })
     .end(function (err, res) {
 
-      var dummy_foodId = res.body.success._id
+      var dummy_foodId = res.body._id
 
       chai.request(app)
         .post('/api/users/request')
@@ -132,7 +127,7 @@ it('result - put a request, seller menerima request dari user ', function (done)
               expect(res).to.have.status(200)
               expect(res).to.be.an('object')
               expect(res.body).to.be.an('object')
-              expect(res.body.request.status).to.equal(1)
+              expect(res.body.success.status).to.equal(1)
             })
           done()
 
@@ -141,14 +136,16 @@ it('result - put a request, seller menerima request dari user ', function (done)
 })
 
 
-
   it('result - Read all request', function (done) {
   chai.request(app)
     .get('/api/users/request')
     .set('token', token)
     .end(function (err, res) {
+
       expect(res).to.have.status(200)
       expect(res).to.be.an('object')
+      expect(res.body).to.be.an('object')
+      expect(res.body.success).to.have.length.above(0)
       done()
     })
   })
@@ -166,4 +163,69 @@ it('result - put a request, seller menerima request dari user ', function (done)
           done()
         })
     })
+})
+
+
+describe('Testing CRUD - Request without token', function () {
+
+  it('result - Post a request without token', function (done) {
+
+    chai.request(app)
+    .post('/api/users/food')
+      .send({
+        food_title: "Nasi Bebek Sambel Ijo",
+        food_price: "35000",
+        food_qty  : 10,
+        food_pic : "food.jpg",
+        food_tags :"pedas enak gurih",
+        food_desc : "deskripsi tentang sebuah makanan",
+        status : 1,
+        _userId : '58d1080f3a5a631b4bdfc48e'
+      })
+      .end(function (err, res) {
+
+        let dummy_foodId = res.body._id
+
+        chai.request(app)
+          .post('/api/users/request')
+          .send({
+            _foodId: dummy_foodId,
+            request_notes: 'Irsan testing request again !',
+            request_qty: 1,
+          })
+          .end(function (err, res) {
+            expect(res).to.have.status(200)
+            expect(res).to.be.an('object')
+            expect(res.text).to.equal('Unauthorized')
+            done()
+          })
+      })
+    })
+
+    it('result - Seller reject request', function (done) {
+      chai.request(app)
+        .put('/api/users/request')
+        .send({
+          _requestId : '58d250d57e23615134b1737c'
+        })
+        .end(function (err, res) {
+          expect(res).to.have.status(200)
+          expect(res).to.be.an('object')
+          expect(res.text).to.equal('Unauthorized')
+          done()
+        })
+    })
+
+
+    it('result - Read all request', function (done) {
+    chai.request(app)
+      .get('/api/users/request')
+      .end(function (err, res) {
+        expect(res).to.have.status(200)
+        expect(res).to.be.an('object')
+        expect(res.text).to.equal('Unauthorized')
+        done()
+      })
+    })
+
 })

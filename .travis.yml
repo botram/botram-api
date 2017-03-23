@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+- '6'
+services:
+- mongodb
+deploy:
+  provider: elasticbeanstalk
+  access_key_id: AKIAIHRYLQU6YB3ZDT5A
+  secret_access_key:
+    secure: cqf0NBChTkyKOU351NO2HF1BGd0lvRzWNisjScMnA6/ZOwCfrrjZKhP/l1JhkWvEzhYM/Or/l16SXLF0USIGVeatw9FkKYJ9263S/K+WVB4me8yFVUV0HASL/rN5g5GdscT6TjmTAJnNt88rQb7Xhy3kv6/1kt1KdVVH+MJ+MuO6H3jalOHawjHs/WG6fTPfci5gZW7uUpIKiyym72dymxWVQpiX8U4lfJKw78eZik6eh7N3WufPupIvF+wc5H4HL0+oXvcOGcTj4UW3E9qcbwd4mbha37OzgFEHqGOY+v+t7C1g+K4QbE47a5N+BPvenl90/PfUxbdfOzkikVt2xcI4KiuGt3nHMoKdgrGRpAlO3HRbhM47MbNkN0EBkMwdHwFPWonSn8fFmoMR9m5FNSEHb4iYEYZCmhXREDbCCZtG8nKZ46SSwPpXJfyqa68R6woLj50belLFhySRoFgE6/so7oaIfMIWbQevPRTYT2C/efxqzXl1FuO8dRXNJVYplR2yEA08z25QHh14cQaBdpS642AtLSFnYua4SME1SNgtVctYDi+qnYLegR9YSyXwH8Dav6/IIhXSBFYvc6QZiUFKN2JsF3aacUKC7O3J1d54HdIJP0upZ/y99csYdaUwFbcOBm17b8sVqQ/U8kEFWGB6v0RhuPQtZE8IQq9Uxy0=
+  region: ap-southeast-1
+  app: botram-api
+  env: botram-api-dev
+  bucket_name : elasticbeanstalk-ap-southeast-1-697693785817
+  on:
+    repo: botram/botram-api
+    branch: development

@@ -42,7 +42,7 @@ module.exports = {
       let food = {
         _id: req.params.id
       }
-      model.find(food).populate('_userId')
+      model.findOne(food).populate('_userId')
       .then(function(data){
         if(data) res.json(data)
       })
@@ -111,9 +111,9 @@ module.exports = {
       let food = {
         _id : req.body._foodId
       }
-      Model.findByIdAndRemove(food)
+      model.findByIdAndRemove(food)
       .then(function(data){
-        if(data) res.json({success : "Data Deleted"})
+        if(data) res.json(data)
       })
       .catch(function(err){
         if(err) res.json({err : err})
@@ -135,9 +135,7 @@ module.exports = {
         $or:[food,tag]
       }).populate('_userId')
       .then(function(item){
-        if(item) res.json({
-          success : item
-        })
+        if(item) res.json(item)
       }).catch(function(err){
 
         if(err) res.json({
