@@ -41,6 +41,7 @@ Botram uses a number of open source projects to work properly:
 * [mongoose](http://mongoosejs.com/) - Awesome mongoose !
 * [mongoDB](https://www.mongodb.com/) - Awesome mongoDB !
 * [React-native](https://facebook.github.io/react-native/) - Awesome future technology by [facebook](http://facebook.com) !
+* [Redux](http://redux.js.org/) - predictable state container for JavaScript apps !
 
 
 ### API services
