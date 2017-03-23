@@ -1,6 +1,7 @@
 # Botram-api (API services)
 
 ![botram.png](botram.png)
+![Botram via travis ](https://travis-ci.org/botram/botram-api.svg?branch=development)
 
 Botram-api is an API service for mobile app called "Botram", developed by :
 
@@ -42,6 +43,7 @@ Botram uses a number of open source projects to work properly:
 * [mongoDB](https://www.mongodb.com/) - Awesome mongoDB !
 * [React-native](https://facebook.github.io/react-native/) - Awesome future technology by [facebook](http://facebook.com) !
 * [Redux](http://redux.js.org/) - predictable state container for JavaScript apps !
+* [Travis](https://travis-ci.org) - Test and deploy your code with confidence !
 
 
 ### API services
