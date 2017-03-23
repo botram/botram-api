@@ -1,7 +1,7 @@
 # Botram-api (API services)
 
 ![botram.png](botram.png)
-![Botram via travis ](https://travis-ci.org/botram/botram-api.svg?branch=development)
+[![Build Status](https://travis-ci.org/botram/botram-api.svg?branch=development)](https://travis-ci.org/botram/botram-api)
 
 Botram-api is an API service for mobile app called "Botram", developed by :
 
