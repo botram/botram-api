@@ -30,11 +30,6 @@ router.put('/food/edit',cektoken, controllers.edit)
 router.delete('/food',cektoken, controllers.delete)
 router.get('/food/byfood/:food',cektoken, controllers.browse);
 
-// ini hanya untuk ngetes travisnya berjalan dengan baik, boleh dihapus kapan saja
-router.get('/santestravis',function(req,res,next){
-  console.log("hanya untuk testing travis");
-});
-
 
 router.post('/request',cektoken, requestController.create)
 router.get('/request',cektoken, requestController.read)
