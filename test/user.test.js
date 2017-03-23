@@ -10,6 +10,7 @@ const token =`eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyIkX18iOnsic3RyaWN0TW9kZSI6d
 
 
 describe('Testing CRUD - User', function () {
+
   it('result - Create a user', function (done) {
     let dummy = {
       name: 'budi',
@@ -173,5 +174,65 @@ describe('Testing CRUD - User', function () {
             })
         })
   })
+
+})
+
+describe('Testing CRUD - User without token', function () {
+
+  it('result - Get all user without token', function (done) {
+    chai.request(app)
+    .get('/api/users/')
+    .end(function (err, res) {
+      expect(res).to.have.status(200)
+      expect(res).to.be.an('object')
+      expect(res.text).to.equal('Unauthorized')
+      done()
+    })
+  })
+
+  it('result - Show one User without token', function (done) {
+    chai.request(app)
+    .get('/api/users/58d1080f3a5a631b4bdfc48e')
+    .end(function (err, res) {
+      expect(res).to.have.status(200)
+      expect(res).to.be.an('object')
+      expect(res.text).to.equal('Unauthorized')
+      done()
+    })
+  })
+
+
+it('result - Add FavbySearch without token', function (done) {
+  let dummyData = {
+    ratedBy: "asdas",
+    score: 3
+  }
+  chai.request(app)
+    .put(`/api/users/123213kjhgg/favbysearch`)
+    .send(dummyData)
+    .end(function (err, res) {
+      expect(res).to.have.status(200)
+      expect(res).to.be.an('object')
+      expect(res.text).to.equal('Unauthorized')
+      done()
+    })
+  })
+
+it('result - Add Rating without token', function (done) {
+
+  let dummyData = {
+    ratedBy: "asdas",
+    score: 3
+  }
+  chai.request(app)
+  .put(`/api/users/asd1234124/addrating`)
+  .send(dummyData)
+  .end(function(err,res){
+    expect(res).to.have.status(200)
+    expect(res).to.be.an('object')
+    expect(res.text).to.equal('Unauthorized')
+    done()
+  })
+})
 
 })

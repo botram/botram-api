@@ -26,10 +26,8 @@ describe('Testing CRUD - food', function () {
         _userId : '58d1080f3a5a631b4bdfc48e'
       })
       .end(function (err, res) {
-
         expect(res).to.have.status(200);
         expect(res).to.be.an('object');
-
         done()
       })
   })
@@ -48,16 +46,15 @@ describe('Testing CRUD - food', function () {
         status: 1
       })
       .end(function (err, res) {
-
         expect(res).to.have.status(200)
         expect(res).to.be.an('object')
-        expect(res.body.success).to.have.property('food_title')
-        expect(res.body.success).to.have.property('food_price')
-        expect(res.body.success).to.have.property('food_qty')
-        expect(res.body.success).to.have.property('food_tags')
-        expect(res.body.success).to.have.property('food_desc')
-        expect(res.body.success).to.have.property('food_qty')
-        expect(res.body.success).to.have.property('status')
+        expect(res.body).to.have.property('food_title')
+        expect(res.body).to.have.property('food_price')
+        expect(res.body).to.have.property('food_qty')
+        expect(res.body).to.have.property('food_tags')
+        expect(res.body).to.have.property('food_desc')
+        expect(res.body).to.have.property('food_qty')
+        expect(res.body).to.have.property('status')
 
         done()
       })
@@ -77,6 +74,7 @@ describe('Testing CRUD - food', function () {
         status: 1
       })
       .end(function (err, res) {
+
         expect(res).to.have.status(200)
         expect(res).to.be.an('object')
         expect(res.body.err).to.be.an('object')
@@ -114,10 +112,10 @@ describe('Testing CRUD - food', function () {
     .get('/api/users/food')
     .set('token', token)
       .end(function (err, res) {
+
         expect(res).to.have.status(200)
         expect(res).to.be.an('object')
-        expect(res.body).to.have.property('success')
-        expect(res.body.success).to.have.length.above(0)
+        expect(res.body).to.have.length.above(0)
         done()
       })
   })
@@ -130,8 +128,7 @@ describe('Testing CRUD - food', function () {
       .end(function (err, res) {
         expect(res).to.have.status(200)
         expect(res).to.be.an('object')
-        expect(res.body).to.have.property('success')
-        expect(res.body.success).to.have.length.above(0)
+        expect(res.body).to.have.length.above(0)
         done()
       })
   })
@@ -143,10 +140,39 @@ describe('Testing CRUD - food', function () {
       .end(function (err, res) {
         expect(res).to.have.status(200)
         expect(res).to.be.an('object')
-        expect(res.body).to.have.property('success')
         done()
       })
   })
+
+  it('result - Searching food with user id', function (done) {
+
+    chai.request(app)
+    .get('/api/users/food/byuser/58d1080f3a5a631b4bdfc48e')
+    .set('token', token)
+      .end(function (err, res) {
+
+        expect(res).to.have.status(200)
+        expect(res).to.be.an('object')
+
+        done()
+      })
+  })
+
+  it('result - Searching food with user id but not found', function (done) {
+
+    chai.request(app)
+    .get('/api/users/food/byuser/58d1080f3a5a63')
+    .set('token', token)
+      .end(function (err, res) {
+
+        expect(res).to.have.status(200)
+        expect(res).to.be.an('object')
+        expect(res.body).to.have.property('err')
+        expect(res.body.err.name).to.equal('CastError')
+        done()
+      })
+  })
+
 
   it('result - Updating food ', function (done) {
     chai.request(app)
@@ -159,8 +185,82 @@ describe('Testing CRUD - food', function () {
       .end(function (err, res) {
         expect(res).to.have.status(200)
         expect(res).to.be.an('object')
-        expect(res.body).to.have.property('success')
-        expect(res.body.success.food_pic).to.equal('food_pic.jpg')
+        expect(res.body.food_pic).to.equal('food_pic.jpg')
+        done()
+      })
+  })
+
+})
+
+describe('Testing CRUD - food without token', function () {
+
+  it('result - Post a food without token', function (done) {
+    chai.request(app)
+    .post('/api/users/food')
+      .send({
+        food_title: "Nasi Bebek Sambel Ijo",
+        food_price: "35000",
+        food_qty  : 3,
+        food_pic : "food.jpg",
+        food_tags :"pedas enak gurih",
+        food_desc : "deskripsi tentang sebuah makanan",
+        status : 1,
+        _userId : '58d1080f3a5a631b4bdfc48e'
+      })
+      .end(function (err, res) {
+        expect(res).to.have.status(200)
+        expect(res).to.be.an('object')
+        expect(res.text).to.equal('Unauthorized')
+        done()
+      })
+  })
+
+  it('result - Updating food without token ', function (done) {
+    chai.request(app)
+    .put('/api/users/food/edit')
+    .send({
+      _foodId  : '58cf94cef868711482789cde',
+      food_pic : 'food_pic.jpg'
+    })
+      .end(function (err, res) {
+        expect(res).to.have.status(200)
+        expect(res).to.be.an('object')
+        expect(res.text).to.equal('Unauthorized')
+        done()
+      })
+  })
+
+  it('result - Get all food without token', function (done) {
+    chai.request(app)
+    .get('/api/users/food')
+      .end(function (err, res) {
+        expect(res).to.have.status(200)
+        expect(res).to.be.an('object')
+        expect(res.text).to.equal('Unauthorized')
+        done()
+      })
+  })
+
+  it('result - Search food without token', function (done) {
+
+    chai.request(app)
+    .get('/api/users/food/byfood/sapi')
+      .end(function (err, res) {
+        expect(res).to.have.status(200)
+        expect(res).to.be.an('object')
+        expect(res.text).to.equal('Unauthorized')
+        done()
+      })
+  })
+
+  it('result - Searching food with user id, but without token', function (done) {
+
+    chai.request(app)
+    .get('/api/users/food/byuser/58d1080f3a5a631b4bdfc48e')
+      .end(function (err, res) {
+        expect(res).to.have.status(200)
+        expect(res).to.be.an('object')
+        expect(res.text).to.equal('Unauthorized')
         done()
       })
   })
