@@ -113,7 +113,7 @@ module.exports = {
       }
       model.findByIdAndRemove(food)
       .then(function(data){
-        if(data) res.json({success : "Data Deleted"})
+        if(data) res.json(data)
       })
       .catch(function(err){
         if(err) res.json({err : err})
@@ -135,9 +135,7 @@ module.exports = {
         $or:[food,tag]
       }).populate('_userId')
       .then(function(item){
-        if(item) res.json({
-          success : item
-        })
+        if(item) res.json(item)
       }).catch(function(err){
 
         if(err) res.json({

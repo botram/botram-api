@@ -60,14 +60,14 @@ module.exports = {
                 error: err
             });
           } else if(user) {
-            console.log(user);
+
             return res.status(200).json({
               token : jwt.sign(user, 'secret'),
               userId : user._id
             })
           } else if(!user) {
             const newUser = userModel.create(userData).then(data => {
-              console.log(data);
+              
               return res.status(200).json({
                 token : jwt.sign(data, 'secret'),
                 userId : data._id

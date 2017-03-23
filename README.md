@@ -1,6 +1,7 @@
 # Botram-api (API services)
 
 ![botram.png](botram.png)
+[![Build Status](https://travis-ci.org/botram/botram-api.svg?branch=development)](https://travis-ci.org/botram/botram-api)
 
 Botram-api is an API service for mobile app called "Botram", developed by :
 
@@ -41,6 +42,8 @@ Botram uses a number of open source projects to work properly:
 * [mongoose](http://mongoosejs.com/) - Awesome mongoose !
 * [mongoDB](https://www.mongodb.com/) - Awesome mongoDB !
 * [React-native](https://facebook.github.io/react-native/) - Awesome future technology by [facebook](http://facebook.com) !
+* [Redux](http://redux.js.org/) - predictable state container for JavaScript apps !
+* [Travis](https://travis-ci.org) - Test and deploy your code with confidence !
 
 
 ### API services
@@ -53,7 +56,7 @@ Botram uses a number of open source projects to work properly:
 | PUT    | api/users/:id/favbysearch    | User add favourite tags        |
 | GET    | api/users/:id/favourite      | User Display his/her own fav   |
 | PUT    | api/users/:id/addrating      | User add Rating                |
-| DELETE | api/users/:id                | User Delete                    |
+| DELETE | api/users/food               | User Delete food               |
 | POST   | api/users/food               | User add food                  |
 | PUT    | api/users/food               | User updating food             |
 | GET    | api/users/food/byuser/:iduser| User search user making food   |
