@@ -14,9 +14,6 @@ Botram-api is an API service for mobile app called "Botram", developed by :
 
   >This is out final project a [HACKTIV8](https://hacktiv8.com/). After we graduated, the server is already takedown, so it cannot be accessed or downloaded, we make this app just for education, for ourself, thank you ^^
 
-
-
-
 # NEW FEATURE !
 `# wednesday 21/03/2017`
  wiring those API to _MOBILE APP_
