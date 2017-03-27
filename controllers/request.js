@@ -2,7 +2,7 @@ const Model = require('../models/request')
 const Food = require('../models/food')
 
 module.exports = {
-    //DISINI BUTUH ID USER
+
     create : function(req,res){
         let food = {
           _id : req.body._foodId
@@ -21,7 +21,11 @@ module.exports = {
             .then(function(item){
               item._requestId.push(data._id)
               item.save()
-              res.json({success : item})
+
+              res.json({
+                success : item,
+                request : data
+              })
             })
             .catch(function(err){
               if(err) res.json({err : err})
@@ -64,8 +68,9 @@ module.exports = {
 
           item.save()
           res.json({
-            request : data,
-            food : item})
+            success : data,
+            food : item
+          })
         })
         .catch(function(err){
           if(err) res.json({err : err})
@@ -75,15 +80,17 @@ module.exports = {
         if(err) res.json({err : err})
       })
     },
-    delete : function(req,res){
+    reject : function(req,res){
 
             let request = {
               _id : req.body._requestId
             }
-            Model.findByIdAndRemove(request)
+            Model.findOne(request)
             .then(function(data){
               if(data)
-                res.json({success :"Request Deleted"})
+              data.status = 2
+              data.save()
+              res.json({success : data})
             })
             .catch(function(err){
               if(err) res.json({err : err})

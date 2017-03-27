@@ -49,29 +49,34 @@ module.exports = {
      * userController.create()
      */
 
-     create: function (req, res) {
-         var user = {
-           name: req.body.name,
-           email: req.body.email,
-           pic: req.body.pic,
-           id_fb: req.body.id_fb
-         };
+    create: function (req, res) {
 
-         userModel.findOrCreate({id_fb: user.id_fb, name: user.name, email: user.email, pic: user.pic}, function(err, user, created) {
-           if (err) {
-               return res.status(500).json({
-                   message: 'Error when getting user',
-                   error: err
-               });
-           }
-           if (!created || created) {
-               return res.status(201).json({token:jwt.sign(user, 'secret'), userId: user._id})
-           }
+        var userData = {    			name : req.body.name,    			email : req.body.email,          pic : req.body.pic,
+          id_fb: req.body.id_fb,          city : "",          address :"",          phone : "",          rating : 0        };
+        userModel.findOne({id_fb:userData.id_fb}, function(err, user) {
+          if (err) {
+            return res.status(500).json({
+                message: 'Error when getting user',
+                error: err
+            });
+          } else if(user) {
 
-         })
-     },
+            return res.status(200).json({
+              token : jwt.sign(user, 'secret'),
+              userId : user._id
+            })
+          } else if(!user) {
+            const newUser = userModel.create(userData).then(data => {
+              
+              return res.status(200).json({
+                token : jwt.sign(data, 'secret'),
+                userId : data._id
+              })
+            })
 
-
+          }
+        })
+    },
 
     /**
      * userController.update()
@@ -91,9 +96,7 @@ module.exports = {
                 });
             }
 
-      			user.phone = req.body.phone ? req.body.phone : user.phone;
-      			user.address = req.body.address ? req.body.address : user.address;
-      			user.city = req.body.city ? req.body.city : user.city;
+      			user.phone === req.body.phone ? user.phone : user.phone = req.body.phone;      			user.address === req.body.address ? user.address : user.address = req.body.address;      			user.city === req.body.city ? user.city : user.city = req.body.city;
             user.save(function (err, user) {
                 if (err) {
                     return res.status(500).json({
@@ -208,7 +211,33 @@ module.exports = {
                     error: err
                 });
             }
-            return res.status(204).json();
+            return res.status(200).json();
         });
+    },
+
+    favourite : function(req,res){
+      let user = {
+        _id : req.params.id
+      }
+      userModel.findOne(user)
+        .then(function(user){
+          if(user){
+
+            let tag = {
+             food_tags : {$in: user.fav}
+            }
+
+            foodModel.find(tag)
+            .then(function(data){
+                if(data) res.json({ success : data })
+            }).catch(function(err){
+              if(err) res.json({ err : err })
+            })
+          }
+        }).catch(function(err){
+          if(err) res.json({
+            err : err
+          })
+        })
     }
 };

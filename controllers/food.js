@@ -22,24 +22,43 @@ module.exports = {
         model.create(food)
         .then(function(data){
           if(data) {
-            res.json({success : data})
+            res.json(data)
           }
         })
         .catch(function(err){
           if(err) res.json({err : err})
         })
     },
-    read : function (req,res){
 
-      let food_date = new Date()
+    read : (req,res) => {
+      model.getAllSorted((err,data) => {
+        res.json(data)
+      })
+    },
+
+
+    foodDetail : function (req,res){
 
       let food = {
-        food_date : food_date.toDateString(),
-        status : 1
+        _id: req.params.id
+      }
+      model.findOne(food).populate('_userId')
+      .then(function(data){
+        if(data) res.json(data)
+      })
+      .catch(function(err){
+        if(err) res.json({err : err})
+      })
+    },
+
+    foodbyUser : function (req,res){
+
+      let food = {
+        _userId: req.params.iduser
       }
       model.find(food).populate('_userId')
       .then(function(data){
-        if(data) res.json({success : data})
+        if(data) res.json(data)
       })
       .catch(function(err){
         if(err) res.json({err : err})
@@ -61,7 +80,7 @@ module.exports = {
           data.food_qty = qty
           data.food_date = date.toDateString()
           data.save()
-          res.json({success : data})
+          res.json(data)
         }
       })
       .catch(function(err){
@@ -69,13 +88,32 @@ module.exports = {
       })
     },
 
+    edit : function (req,res){
+
+      let food = {
+        _id : req.body._foodId
+      }
+       let food_pic = req.body.food_pic
+
+      model.findOne(food)
+      .then(function(data){
+        if(data){
+          data.food_pic = food_pic
+          data.save()
+          res.json(data)
+        }
+      })
+      .catch(function(err){
+        if(err) res.json({err : err})
+      })
+    },
     delete : function (req,res){
       let food = {
         _id : req.body._foodId
       }
-      Model.findByIdAndRemove(food)
+      model.findByIdAndRemove(food)
       .then(function(data){
-        if(data) res.json({success : "Data Deleted"})
+        if(data) res.json(data)
       })
       .catch(function(err){
         if(err) res.json({err : err})
@@ -90,17 +128,19 @@ module.exports = {
        food_title : regex
       }
       let tag = {
-        food_tags : {$in: [regex]}
+       food_tags : {$in: [regex]}
       }
 
       model.find({
         $or:[food,tag]
-      }).populate('_userId ')
+      }).populate('_userId')
       .then(function(item){
-        if(item) res.json({ success : item})
+        if(item) res.json(item)
       }).catch(function(err){
 
-        if(err) res.json({err : err})
+        if(err) res.json({
+          err : err
+        })
       })
 
   }
